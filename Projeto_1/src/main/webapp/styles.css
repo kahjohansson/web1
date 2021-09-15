@@ -1,0 +1,53 @@
+body{
+	margin:0;
+}
+
+.nav{
+	display:flex;
+	height:3.2rem;
+	justify-content:center;
+	align-items:center;
+	
+	margin:0;
+}
+
+.nav a{
+	justify-self:flex-end;
+}
+
+.sub_nav{
+    display:flex;
+	height:3.2rem;
+	justify-content:center;
+	align-items:center;
+	margin-top: 3rem;
+    margin-bottom: 3rem;
+	
+}
+
+.btns{
+	display:flex;
+    flex-direction: column;
+	justify-items:center;
+	align-items:center;
+	gap:3rem;
+	
+	
+}
+.btn{
+	width:25rem;
+	height:5rem;
+	display:flex;
+	justify-content:center;
+    color: white;
+    background-color: blueviolet;
+	align-items:center;
+	font-size:1.8rem;
+}
+.none{
+	display:none;
+}
+
+a{
+	text-decoration:none;
+}
