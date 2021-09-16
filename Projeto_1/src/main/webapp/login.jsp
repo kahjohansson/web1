@@ -15,6 +15,8 @@
 
 <body>
 
+	<% String contextPath = request.getContextPath().replace("/", ""); %>
+
 	<fmt:bundle basename="messages">
 						
 		<div class="nav">
@@ -35,7 +37,7 @@
 					<input type="submit" name="loginCliente" value=<fmt:message key="login"/> />
 				</div>
 			</form>
-			<a href="paginaCadastro.jsp"><fmt:message key="createAccount"/></a>
+			<a href="/<%= contextPath%>/"><fmt:message key="createAccount"/></a>
 		</fieldset>
 		
 
