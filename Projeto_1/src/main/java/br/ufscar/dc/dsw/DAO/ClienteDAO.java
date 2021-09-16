@@ -17,8 +17,10 @@ public class ClienteDAO {
         String sql = "INSERT INTO Cliente (cpf, nome, email, senha, telefone, sexo, dataNasc) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
-        	Class.forName("org.apache.derby.jdbc.ClientDriver");
-			String url = "jdbc:derby://localhost:1527/sistema_agendamento";
+        	// Class.forName("org.apache.derby.jdbc.ClientDriver"); //Derby
+			//String url = "jdbc:derby://localhost:1527/sistema_agendamento"; //Derby
+            Class.forName("com.mysql.cj.jdbc.Driver"); //Mysql
+            String url = "jdbc:mysql://localhost:3306/SistemaAgendamento"; //Mysql
 			Connection conn = (Connection) DriverManager.getConnection(url, "root", "root");
             PreparedStatement statement = conn.prepareStatement(sql);
 

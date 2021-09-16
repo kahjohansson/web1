@@ -37,7 +37,7 @@
 					<input type="submit" name="loginCliente" value=<fmt:message key="login"/> />
 				</div>
 			</form>
-			<a href="/<%= contextPath%>/"><fmt:message key="createAccount"/></a>
+			<a href="/<%= contextPath%>/cliente/pagina_cadastro"><fmt:message key="createAccount"/></a>
 		</fieldset>
 		
 

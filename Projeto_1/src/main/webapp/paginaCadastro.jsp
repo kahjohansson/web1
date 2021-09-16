@@ -27,23 +27,23 @@
 		
 			
 		<fieldset>
-			<form name="cadastro" action="/<%= contextPath%>/login.jsp" method="POST">
+			<form name="cadastro" action="/<%= contextPath%>/cliente/cadastra" method="POST">
 				<div>
 					<div>
 						<p>CPF</p> 							
 						<input type="text"  name="cpf" /> 
 						
 						<p><fmt:message key="name"/></p>	
-						<input type="text" name="nome" /> 
+						<input type="text" name="nome" value="${cliente.nome}"/> 
                         
                         <p>Email</p> 						
-                        <input type="email"  name="email" /> 
+                        <input type="email"  name="email" value="${cliente.email}"/> 
                         
                         <p><fmt:message key="pass"/></p>		
-                        <input type="password"  name="senha" /> 
+                        <input type="password"  name="senha" value="${cliente.senha}"/> 
                         
                         <p><fmt:message key="tel"/></p> 		
-                        <input type="text" name="telefone" /> 
+                        <input type="text" name="telefone" value="${cliente.telefone}"/> 
                         
                         <p><fmt:message key="gender"/></p> 		
                         <input type="radio" name="sexo" value="male"> Male<br>
@@ -51,7 +51,7 @@
 					  	<input type="radio" name="sexo" value="other"> Other
                         
                         <p><fmt:message key="birthDate"/></p> 	
-                        <input type="date"  name="dataNasc" /> 
+                        <input type="date"  name="dataNasc" value="${cliente.dataNasc}" /> 
                      
 					</div>
 					<input type="submit" name="register" value=<fmt:message key="register"/> />
