@@ -18,9 +18,9 @@ public class ClienteDAO {
 
         try {
         	Class.forName("org.apache.derby.jdbc.ClientDriver");
-			String url = "jdbc:derby://localhost:1527/Livraria";
+			String url = "jdbc:derby://localhost:1527/sistema_agendamento";
 			Connection conn = (Connection) DriverManager.getConnection(url, "root", "root");
-            PreparedStatement statement = conn.prepareStatement(sql);;
+            PreparedStatement statement = conn.prepareStatement(sql);
 
             statement = conn.prepareStatement(sql);
             statement.setString(1, cliente.getCpf());
