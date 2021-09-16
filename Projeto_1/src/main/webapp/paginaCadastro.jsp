@@ -13,6 +13,9 @@
 </head>
 
 <body>
+
+	<% String contextPath = request.getContextPath().replace("/", ""); %>
+
 	<fmt:bundle basename="messages">
 	
 		<div class="nav">
@@ -24,7 +27,7 @@
 		
 			
 		<fieldset>
-			<form name="cadastro" action="index.jsp" method="POST">
+			<form name="cadastro" action="/<%= contextPath%>/cliente/cadastra" method="POST">
 				<div>
 					<div>
 						<p>CPF</p> 							
