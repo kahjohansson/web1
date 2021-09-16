@@ -14,7 +14,7 @@ public class ClienteDAO {
 	
 	public void insere(Cliente cliente) {
 
-        String sql = "INSERT INTO Cliente (nome, email, senha, cpf, telefone, sexo, dataNasc) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Cliente (cpf, nome, email, senha, telefone, sexo, dataNasc) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
         	Class.forName("org.apache.derby.jdbc.ClientDriver");
