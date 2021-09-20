@@ -3,16 +3,16 @@ package br.ufscar.dc.dsw.POJO;
 
 public class Cliente extends Usuario {
 
-	public Cliente(String cpf, String nome, String email, String senha, String telefone, String sexo, String dataNasc) {
+	public Cliente(String cpf, String nome, String email, String senha, String telefone, String sexo, String dataNascimento) {
 		super(cpf, nome, email, senha);
 		this.telefone = telefone;
 		this.sexo = sexo;
-		this.dataNasc = dataNasc;
+		this.dataNascimento = dataNascimento;
 	}
 
 	private String telefone;
 	private String sexo;
-	private String dataNasc;
+	private String dataNascimento;
 
 	public String getSexo() {
 		return sexo;
@@ -30,11 +30,11 @@ public class Cliente extends Usuario {
 		this.telefone = telefone;
 	}
 
-	public String getDataNasc() {
-		return dataNasc;
+	public String getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setDataNasc(String dataNasc) {
-		this.dataNasc = dataNasc;
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 }

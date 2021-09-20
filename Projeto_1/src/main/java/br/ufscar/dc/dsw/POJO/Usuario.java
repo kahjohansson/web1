@@ -1,6 +1,6 @@
 package br.ufscar.dc.dsw.POJO;
 
-public class Usuario {
+abstract public class Usuario {
 
     private String cpf;
 	private String nome;
