@@ -1,7 +1,6 @@
 package br.ufscar.dc.dsw.controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -68,12 +67,12 @@ public class ClienteController extends HttpServlet {
 		String senha = request.getParameter("senha");
 		String sexo = request.getParameter("sexo");
 		String telefone = request.getParameter("telefone");
-		LocalDate dataNasc = LocalDate.parse(request.getParameter("dataNasc"));
+		String dataNasc = request.getParameter("dataNasc");
 
 		Cliente cliente = new Cliente(cpf, nome, email, senha, telefone, sexo, dataNasc);
 		
 		try {
-			dao.insere(cliente);
+			dao.insert(cliente);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
