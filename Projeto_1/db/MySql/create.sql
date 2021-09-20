@@ -1,20 +1,42 @@
-create database SistemaAgendamento;
-use SistemaAgendamento;
+CREATE SCHEMA IF NOT EXISTS sistema_agendamento DEFAULT CHARACTER SET utf8;
+USE sistema_agendamento;
 
-create table Cliente(
-    cpf varchar(16) not null unique,
-    nome varchar(256) not null,
-    email varchar(256) not null unique,
-    senha varchar(256) not null,
-    telefone varchar(13) not null,
-    sexo varchar(256) not null,
-    dataNasc date not null,
 
-    primary key (cpf)
-);
+CREATE TABLE IF NOT EXISTS usuarios (
+  cpf VARCHAR(11) NOT NULL,
+  nome VARCHAR(256) NOT NULL,
+  email VARCHAR(256) NOT NULL,
+  senha VARCHAR(256) NOT NULL,
+  PRIMARY KEY (cpf));
 
-insert into Cliente(cpf, nome, email, senha, telefone, sexo, dataNasc) values ('1', 'Fulano', 'fulano@gmail.com', 'fulano', '19 1111-1111', 'Masculino', '2001/01/01');
 
-insert into Cliente(cpf, nome, email, senha, telefone, sexo, dataNasc) values ('2', 'Cicrano', 'cicrano@gmail.com', 'cicrano', '19 2222-2222', 'Masculino', '2002/02/20');
+CREATE TABLE IF NOT EXISTS administradores (
+  cpf VARCHAR(11) NOT NULL,
+  PRIMARY KEY (cpf),
+  CONSTRAINT fk_administrador_usuario
+    FOREIGN KEY (cpf)
+    REFERENCES usuarios (cpf));
+
+
+CREATE TABLE IF NOT EXISTS clientes (
+  cpf VARCHAR(11) NOT NULL,
+  sexo VARCHAR(32) NOT NULL,
+  telefone VARCHAR(13) NOT NULL,
+  data_nascimento DATE NOT NULL,
+  PRIMARY KEY (cpf),
+  CONSTRAINT fk_usuario_cliente
+    FOREIGN KEY (cpf)
+    REFERENCES usuarios (cpf));
+
+
+CREATE TABLE IF NOT EXISTS profissionais (
+  cpf VARCHAR(11) NOT NULL,
+  area VARCHAR(256) NOT NULL,
+  especialidade VARCHAR(256) NOT NULL,
+  curriculo VARCHAR(512) NOT NULL,
+  PRIMARY KEY (cpf),
+  CONSTRAINT fk_profissional_usuario
+    FOREIGN KEY (cpf)
+    REFERENCES usuarios (cpf));
 
 SET GLOBAL time_zone = '-3:00';

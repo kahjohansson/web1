@@ -1,7 +1,9 @@
-connect 'jdbc:derby:sistema_agendamento;user=root;password=root';
+USE sistema_agendamento;
 
-insert into Cliente values ('71079094016', 'André Souza dos Santos', 'andre.souza@email.com', 'senhaandre', '16991234567', 'masculino', '1990-01-01');
+INSERT INTO usuarios (cpf, nome, email, senha) VALUES ('11111111111', 'Carla Marques', 'carla.marques@email.com', 'admin');
+INSERT INTO usuarios (cpf, nome, email, senha) VALUES ('22222222222', 'André Ramos', 'andre.ramos@email.com', 'cliente');
+INSERT INTO usuarios (cpf, nome, email, senha) VALUES ('3333333333', 'Bianca Perez', 'bianca.perez@email.com', 'profissional');
 
-disconnect;
-
-quit;
+INSERT INTO administradores (cpf) VALUES ('22222222222');
+INSERT INTO clientes (cpf, sexo, telefone, data_nascimento) VALUES ('22222222222', 'masculino', '5513999999999', '1990-02-02');
+INSERT INTO profissionais (cpf, area, especialidade, curriculo) VALUES ('3333333333', 'psicologia', 'psicanálise lacaniana', 'curriculo_bianca_perez');
