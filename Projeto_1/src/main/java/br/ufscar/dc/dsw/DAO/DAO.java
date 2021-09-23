@@ -20,7 +20,7 @@ abstract public class DAO {
     	
     	String url = "jdbc:mysql://localhost:3306/sistema_agendamento";
     	
-    	return DriverManager.getConnection(url, "root", "password");
+    	return DriverManager.getConnection(url, "root", "root");
     }
 
 }

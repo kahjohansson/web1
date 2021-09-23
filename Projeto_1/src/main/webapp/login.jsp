@@ -40,6 +40,19 @@
 			<a href="/<%= contextPath%>/cliente/pagina_cadastro"><fmt:message key="createAccount"/></a>
 		</fieldset>
 		
+		<fieldset class = "none" id="logPro">
+			<p><fmt:message key="profissional"/></p>
+			<form name="teste" action="/<%= contextPath%>/login" method="POST">
+				<div>
+					<div>
+						<p><fmt:message key="user"/></p> <input type="text"  name="email" /> 
+						<p><fmt:message key="pass"/></p> <input type="password" name="senha" /> 
+					</div>
+					<input type="submit" name="loginProfissional" value=<fmt:message key="login"/> />
+				</div>
+			</form>
+			<a href="/<%= contextPath%>/"><fmt:message key="createAccount"/></a>
+		</fieldset>
 
     </fmt:bundle>
 </body>

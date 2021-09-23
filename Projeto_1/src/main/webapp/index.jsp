@@ -36,9 +36,15 @@
 					</div>
 				</a>
 				
-				<a href="paginaCadastro.jsp">
+				<a href="paginaCadastro_cliente.jsp">
 					<div class="btn">
 						<fmt:message key="regCliente"/>
+					</div>
+				</a>
+
+				<a href="paginaCadastro_profissional.jsp">
+					<div class="btn">
+						<fmt:message key="regProfissional"/>
 					</div>
 				</a>
 				

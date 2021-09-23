@@ -9,18 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.ufscar.dc.dsw.DAO.ClienteDAO;
-import br.ufscar.dc.dsw.POJO.Cliente;
+import br.ufscar.dc.dsw.DAO.ProfissionalDAO;
+import br.ufscar.dc.dsw.POJO.Profissional;
 
-@WebServlet(urlPatterns = "/cliente/*")
-public class ClienteController extends HttpServlet {
+@WebServlet(urlPatterns = "/profissional/*")
+public class ProfissionalController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private ClienteDAO dao;
+	private ProfissionalDAO dao;
 	
 	@Override
 	public void init() {
-		dao = new ClienteDAO();
+		dao = new ProfissionalDAO();
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class ClienteController extends HttpServlet {
 				paginaCadastro(request, response);
 				break;
 			case "/cadastra":
-				cadastraCliente(request, response);
+				cadastraProfissional(request, response);
 			}
 		} catch (RuntimeException | IOException | ServletException e) {
 			throw new ServletException(e);
@@ -53,11 +53,11 @@ public class ClienteController extends HttpServlet {
 
 	private void paginaCadastro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/paginaCadastro_cliente.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/paginaCadastro_profissional.jsp");
 		dispatcher.forward(request, response);
 	}
 
-	private void cadastraCliente(HttpServletRequest request, HttpServletResponse response)
+	private void cadastraProfissional(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
@@ -65,14 +65,14 @@ public class ClienteController extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
-		String sexo = request.getParameter("sexo");
-		String telefone = request.getParameter("telefone");
-		String dataNasc = request.getParameter("dataNasc");
+		String area = request.getParameter("area");
+		String especialidade = request.getParameter("especialidade");
+		String curriculo = request.getParameter("curriculo");
 
-		Cliente cliente = new Cliente(cpf, nome, email, senha, telefone, sexo, dataNasc);
+		Profissional profissional = new Profissional(cpf, nome, email, senha, area, especialidade, curriculo);
 		
 		try {
-			dao.insert(cliente);
+			dao.insert(profissional);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
