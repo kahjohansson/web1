@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,6 +45,8 @@ public class ProfissionalController extends HttpServlet {
 				break;
 			case "/cadastra":
 				cadastraProfissional(request, response);
+			case "/lista":
+				lista(request, response);
 			}
 		} catch (RuntimeException | IOException | ServletException e) {
 			throw new ServletException(e);
@@ -80,4 +83,12 @@ public class ProfissionalController extends HttpServlet {
 		}
 	}
 
+	private void lista(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException{
+			List<Profissional> listaProfissionais = dao.selectAll();
+			request.setAttribute("listaProfissionais", listaProfissionais);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/lista_profissionais.jsp");
+			dispatcher.forward(request, response);
+		}
+	
 }

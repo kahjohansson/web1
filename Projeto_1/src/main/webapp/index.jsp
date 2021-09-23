@@ -36,15 +36,21 @@
 					</div>
 				</a>
 				
-				<a href="paginaCadastro_cliente.jsp">
+				<a href="cliente/pagina_cadastro">
 					<div class="btn">
 						<fmt:message key="regCliente"/>
 					</div>
 				</a>
 
-				<a href="paginaCadastro_profissional.jsp">
+				<a href="profissional/pagina_cadastro">
 					<div class="btn">
 						<fmt:message key="regProfissional"/>
+					</div>
+				</a>
+
+				<a href="profissional/lista">
+					<div class="btn">
+						<fmt:message key="listProfissional"/>
 					</div>
 				</a>
 				

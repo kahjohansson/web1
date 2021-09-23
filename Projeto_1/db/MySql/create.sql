@@ -39,4 +39,15 @@ CREATE TABLE IF NOT EXISTS profissionais (
     FOREIGN KEY (cpf)
     REFERENCES usuarios (cpf));
 
+CREATE TABLE IF NOT EXISTS consultas(
+	cpfCliente varchar(11) NOT NULL,
+	cpfProfissional varchar(14) NOT NULL,
+	data datetime NOT NULL,
+    
+	CONSTRAINT (cpfCliente) 
+  FOREIGN KEY (cpfCliente) REFERENCES clientes(cpf),
+  FOREIGN KEY (cpfProfissional) REFERENCES profissionais(cpf),
+ 	PRIMARY KEY (cpfCliente, cpfProfissional, data)
+);
+
 SET GLOBAL time_zone = '-3:00';
