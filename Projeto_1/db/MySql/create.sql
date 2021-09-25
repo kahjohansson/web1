@@ -44,9 +44,14 @@ CREATE TABLE IF NOT EXISTS consultas(
 	cpfProfissional varchar(14) NOT NULL,
 	data datetime NOT NULL,
     
-	CONSTRAINT (cpfCliente) 
-  FOREIGN KEY (cpfCliente) REFERENCES clientes(cpf),
-  FOREIGN KEY (cpfProfissional) REFERENCES profissionais(cpf),
+	CONSTRAINT fk_cpf_cliente
+  FOREIGN KEY (cpfCliente) 
+  REFERENCES clientes(cpf),
+
+  CONSTRAINT fk_cpf_profissional
+  FOREIGN KEY (cpfProfissional)
+  REFERENCES profissionais(cpf),
+
  	PRIMARY KEY (cpfCliente, cpfProfissional, data)
 );
 
