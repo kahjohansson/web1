@@ -38,29 +38,10 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String action = request.getPathInfo();
-        if (action == null) {
-            action = "";
+        if (request.getParameter("login_") != null) {
+            login(request, response);
         }
 
-        try {
-            switch (action) {
-                case "/index":
-                    paginaLogin(request, response);
-                    break;
-                case "realiza_login":
-                    login(request, response);
-            }
-        } catch (RuntimeException | IOException | ServletException e) {
-            throw new ServletException(e);
-        }
-
-    }
-
-    private void paginaLogin(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
-        dispatcher.forward(request, response);
     }
 
     private void login(HttpServletRequest request, HttpServletResponse response)
@@ -125,5 +106,5 @@ public class LoginController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
 		rd.forward(request, response);
     }
-    
+
 }
