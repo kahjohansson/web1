@@ -26,32 +26,18 @@
 			
 		</div>
 		
-		<fieldset id="logCli">
+		<fieldset id="login">
 			<p><fmt:message key="cliente"/></p>
-			<form name="teste" action="/login" method="POST">
+			<form name="teste" action="/login/realiza_login" method="POST">
 				<div>
 					<div>
 						<p><fmt:message key="user"/></p> <input type="text"  name="email" /> 
 						<p><fmt:message key="pass"/></p> <input type="password" name="senha" /> 
 					</div>
-					<input type="submit" name="loginCliente" value=<fmt:message key="login"/> />
+					<input type="submit" name="login" value=<fmt:message key="login"/> />
 				</div>
 			</form>
 			<a href="/<%= contextPath%>/cliente/pagina_cadastro"><fmt:message key="createAccount"/></a>
-		</fieldset>
-		
-		<fieldset class = "none" id="logPro">
-			<p><fmt:message key="profissional"/></p>
-			<form name="teste" action="/<%= contextPath%>/login" method="POST">
-				<div>
-					<div>
-						<p><fmt:message key="user"/></p> <input type="text"  name="email" /> 
-						<p><fmt:message key="pass"/></p> <input type="password" name="senha" /> 
-					</div>
-					<input type="submit" name="loginProfissional" value=<fmt:message key="login"/> />
-				</div>
-			</form>
-			<a href="/<%= contextPath%>/"><fmt:message key="createAccount"/></a>
 		</fieldset>
 
     </fmt:bundle>
