@@ -38,9 +38,9 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if (request.getParameter("login_") != null) {
+        // if (request.getParameter("login_") != null) {
             login(request, response);
-        }
+        // }
 
     }
 
@@ -86,7 +86,7 @@ public class LoginController extends HttpServlet {
                         if (administrador.getSenha().equals(senha)) {
                             request.getSession().setAttribute("usuarioLogado", administrador);
                             request.getSession().setAttribute("tipoUsuario", "administrador");
-                            RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); //TODO: mudar rota
+                            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin"); //TODO: mudar rota
                             dispatcher.forward(request, response);
                         } else {
                             erros.add("Usuário e/ou senha incorreto(s)!");

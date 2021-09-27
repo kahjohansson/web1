@@ -6,7 +6,7 @@
 <html>
 
 <head>
-    <title>Index</title>
+    <title>Admin Home</title>
     <meta charset="UTF-8">
     <link href="styles.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -34,38 +34,20 @@
 					<fmt:message key="welcome"/>
 					${usuarioLogado.nome}
 				</h2>
-
-				<a href="login">
+				
+				<a href="admin/listaCliente">
 					<div class="btn">
-						<fmt:message key="login"/>
+						<fmt:message key="regCliente"/>
+					</div>
+				</a>					
+				<a href="admin/listaProfissional">
+					<div class="btn">
+						<fmt:message key="regProfissional"/>
 					</div>
 				</a>
 
-				
-
-				<!-- <c:if test="${requestScope.tipoUsuario eq 'administrador'}">
-					<c:out value="${requestScope.tipoUsuario}"/>
-					<a href="cliente/pagina_cadastro">
-						<div class="btn">
-							<fmt:message key="regCliente"/>
-						</div>
-					</a>					
-					<a href="profissional/pagina_cadastro">
-						<div class="btn">
-							<fmt:message key="regProfissional"/>
-						</div>
-					</a>
-
-				</c:if>	 -->
 
 				<!-- tipoUsuario/usuarioLogado -->
-				
-				
-				<a href="profissional/lista">
-					<div class="btn">
-						<fmt:message key="listProfissional"/>
-					</div>
-				</a>
 				
 			</div>
 		</div>
