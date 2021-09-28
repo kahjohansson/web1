@@ -42,25 +42,6 @@
 				</a>
 
 				
-
-				<!-- <c:if test="${requestScope.tipoUsuario eq 'administrador'}">
-					<c:out value="${requestScope.tipoUsuario}"/>
-					<a href="cliente/pagina_cadastro">
-						<div class="btn">
-							<fmt:message key="regCliente"/>
-						</div>
-					</a>					
-					<a href="profissional/pagina_cadastro">
-						<div class="btn">
-							<fmt:message key="regProfissional"/>
-						</div>
-					</a>
-
-				</c:if>	 -->
-
-				<!-- tipoUsuario/usuarioLogado -->
-				
-				
 				<a href="profissional/lista">
 					<div class="btn">
 						<fmt:message key="listProfissional"/>

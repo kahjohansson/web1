@@ -79,7 +79,7 @@ public class ClienteController extends HttpServlet {
 		
 		try {
 			dao.insert(cliente);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/listaCliente");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			System.out.println("Ocorreu um erro!");

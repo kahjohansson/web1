@@ -76,7 +76,7 @@ public class ProfissionalController extends HttpServlet {
 		
 		try {
 			dao.insert(profissional);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/listaProfissional");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			System.out.println("Ocorreu um erro!");

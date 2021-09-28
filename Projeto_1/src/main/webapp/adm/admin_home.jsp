@@ -34,15 +34,27 @@
 					<fmt:message key="welcome"/>
 					${usuarioLogado.nome}
 				</h2>
-				
-				<a href="admin/listaCliente">
+				<a href="cliente/pagina_cadastro">
 					<div class="btn">
 						<fmt:message key="regCliente"/>
 					</div>
-				</a>					
-				<a href="admin/listaProfissional">
+				</a>	
+				
+				<a href="admin/listaCliente">
+					<div class="btn">
+						<fmt:message key="listaCli"/>
+					</div>
+				</a>
+
+				<a href="profissional/pagina_cadastro">
 					<div class="btn">
 						<fmt:message key="regProfissional"/>
+					</div>
+				</a>
+									
+				<a href="admin/listaProfissional">
+					<div class="btn">
+						<fmt:message key="listaPro"/>
 					</div>
 				</a>
 
