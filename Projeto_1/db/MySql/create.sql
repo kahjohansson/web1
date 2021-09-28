@@ -15,7 +15,9 @@ CREATE TABLE IF NOT EXISTS administradores (
   PRIMARY KEY (cpf),
   CONSTRAINT fk_administrador_usuario
     FOREIGN KEY (cpf)
-    REFERENCES usuarios (cpf));
+    REFERENCES usuarios (cpf)
+    ON DELETE CASCADE
+  );
 
 
 CREATE TABLE IF NOT EXISTS clientes (
@@ -26,7 +28,9 @@ CREATE TABLE IF NOT EXISTS clientes (
   PRIMARY KEY (cpf),
   CONSTRAINT fk_usuario_cliente
     FOREIGN KEY (cpf)
-    REFERENCES usuarios (cpf));
+    REFERENCES usuarios (cpf)
+    ON DELETE CASCADE
+  );
 
 
 CREATE TABLE IF NOT EXISTS profissionais (
@@ -37,7 +41,9 @@ CREATE TABLE IF NOT EXISTS profissionais (
   PRIMARY KEY (cpf),
   CONSTRAINT fk_profissional_usuario
     FOREIGN KEY (cpf)
-    REFERENCES usuarios (cpf));
+    REFERENCES usuarios (cpf)
+    ON DELETE CASCADE
+    );
 
 CREATE TABLE IF NOT EXISTS consultas(
 	cpfCliente varchar(11) NOT NULL,
@@ -46,11 +52,13 @@ CREATE TABLE IF NOT EXISTS consultas(
     
 	CONSTRAINT fk_cpf_cliente
   FOREIGN KEY (cpfCliente) 
-  REFERENCES clientes(cpf),
+  REFERENCES clientes(cpf) 
+  ON DELETE CASCADE,
 
   CONSTRAINT fk_cpf_profissional
   FOREIGN KEY (cpfProfissional)
-  REFERENCES profissionais(cpf),
+  REFERENCES profissionais(cpf)
+  ON DELETE CASCADE,
 
  	PRIMARY KEY (cpfCliente, cpfProfissional, data)
 );

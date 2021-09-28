@@ -158,26 +158,15 @@ public class ClienteDAO extends DAO {
 
     public void delete(Cliente cliente) {
         
-    	String query_1 = "DELETE FROM clientes WHERE cpf = ?";
-        String query_2 = "DELETE FROM usuarios WHERE cpf = ?";
+        String query = "DELETE FROM usuarios WHERE cpf = ?";
         
         try {
             Connection conn = this.getConnection();
-            PreparedStatement statement_1 = conn.prepareStatement(query_1);
-            PreparedStatement statement_2 = conn.prepareStatement(query_2);
-
-            conn.setAutoCommit(false); // ativa modo de transação
+            PreparedStatement statement_1 = conn.prepareStatement(query);
 
             statement_1.setString(1, cliente.getCpf());
             statement_1.executeUpdate();
             statement_1.close();
-
-            statement_2.setString(1, cliente.getCpf());
-            statement_2.executeUpdate();
-            statement_2.close();
-            
-            conn.commit();
-            conn.setAutoCommit(true);
             conn.close();
 
         } catch (SQLException e) {
