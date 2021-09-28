@@ -27,7 +27,7 @@
 					<th>SEXO</th>
 					<th>TELEFONE</th>
 	             	<th>DATA NASC</th>
-	             	<th>AÇÂO</th>
+	             	<th>AÇÃO</th>
 	
 				</tr>
 				<c:forEach var="cliente" items="${requestScope.listaClientes}">
