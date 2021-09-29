@@ -44,7 +44,7 @@
 				
 				<a href="profissional/lista">
 					<div class="btn">
-						<fmt:message key="listProfissional"/>
+						<fmt:message key="listProfessionals"/>
 					</div>
 				</a>
 				

@@ -13,6 +13,10 @@
 
 <body>
 
+	<%
+		String contextPath = request.getContextPath().replace("/", "");
+	%>
+
 	<fmt:bundle basename="messages">
 		<div class="nav">
 			<h1>
@@ -31,17 +35,16 @@
 		<div class="btns-sup">
 			<div class=btns>
 				<h2>
-					<fmt:message key="welcome"/>
-					${usuarioLogado.nome}
+					<fmt:message key="clientsManagement"/>
 				</h2>
-				<a href="admin/cliente">
+				<a href="/<%= contextPath%>/admin/cliente/pagina_cadastro">
 					<div class="btn">
-						<fmt:message key="crudClientes"/>
+						<fmt:message key="insertion"/>
 					</div>
 				</a>
-				<a href="admin/profissionais">
+				<a href="/<%= contextPath%>/admin/cliente/lista">
 					<div class="btn">
-						<fmt:message key="crudProfissionais"/>
+						<fmt:message key="rud"/>
 					</div>
 				</a>
 				

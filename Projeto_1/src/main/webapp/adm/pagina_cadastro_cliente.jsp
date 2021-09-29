@@ -27,7 +27,7 @@
 		
 			
 		<fieldset>
-			<form name="cadastro" action="/<%= contextPath%>/cliente/cadastra" method="POST">
+			<form name="cadastro" action="/<%= contextPath%>/admin/cliente/cadastra" method="POST">
 				<div>
 					<div>
 						<p>CPF</p> 							
