@@ -40,11 +40,6 @@ public class ProfissionalController extends HttpServlet {
 
 		try {
 			switch (action) {
-			case "/pagina_cadastro":
-				paginaCadastro(request, response);
-				break;
-			case "/cadastra":
-				cadastraProfissional(request, response);
 			case "/lista":
 				lista(request, response);
 			}
@@ -52,43 +47,13 @@ public class ProfissionalController extends HttpServlet {
 			throw new ServletException(e);
 		}
 
-	}
+	}	
 
-	private void paginaCadastro(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/paginaCadastro_profissional.jsp");
-		dispatcher.forward(request, response);
-	}
-
-	private void cadastraProfissional(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		request.setCharacterEncoding("UTF-8");
-		String cpf = request.getParameter("cpf");
-		String nome = request.getParameter("nome");
-		String email = request.getParameter("email");
-		String senha = request.getParameter("senha");
-		String area = request.getParameter("area");
-		String especialidade = request.getParameter("especialidade");
-		String curriculo = request.getParameter("curriculo");
-
-		Profissional profissional = new Profissional(cpf, nome, email, senha, area, especialidade, curriculo);
-		
-		try {
-			dao.insert(profissional);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/listaProfissional");
-			dispatcher.forward(request, response);
-		} catch (Exception e) {
-			System.out.println("Ocorreu um erro!");
-		}
-	}
-
-	private void lista(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException{
-			List<Profissional> listaProfissionais = dao.selectAll();
-			request.setAttribute("listaProfissionais", listaProfissionais);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/lista_profissionais.jsp");
-			dispatcher.forward(request, response);
-		}
+	private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Profissional> listaProfissionais = dao.selectAll();
+        request.setAttribute("listaProfissionais", listaProfissionais);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/lista_profissionais.jsp");
+        dispatcher.forward(request, response);
+    }
 	
 }

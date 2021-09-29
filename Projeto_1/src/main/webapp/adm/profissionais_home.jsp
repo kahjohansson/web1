@@ -35,17 +35,16 @@
 		<div class="btns-sup">
 			<div class=btns>
 				<h2>
-					<fmt:message key="welcome"/>
-					${usuarioLogado.nome}
+					<fmt:message key="professionalsManagement"/>
 				</h2>
-				<a href="/<%= contextPath%>/admin/cliente">
+				<a href="/<%= contextPath%>/admin/profissional/pagina_cadastro">
 					<div class="btn">
-						<fmt:message key="crudClientes"/>
+						<fmt:message key="insertion"/>
 					</div>
 				</a>
-				<a href="/<%= contextPath%>/admin/profissional">
+				<a href="/<%= contextPath%>/admin/profissional/lista">
 					<div class="btn">
-						<fmt:message key="crudProfissionais"/>
+						<fmt:message key="rud"/>
 					</div>
 				</a>
 				

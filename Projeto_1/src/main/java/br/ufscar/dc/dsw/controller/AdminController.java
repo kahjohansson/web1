@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import br.ufscar.dc.dsw.DAO.AdministradorDAO;
 import br.ufscar.dc.dsw.DAO.ClienteDAO;
 import br.ufscar.dc.dsw.DAO.ProfissionalDAO;
-import br.ufscar.dc.dsw.POJO.Administrador;
 import br.ufscar.dc.dsw.POJO.Cliente;
 import br.ufscar.dc.dsw.POJO.Profissional;
 import br.ufscar.dc.dsw.util.Erro;
@@ -74,8 +73,26 @@ public class AdminController extends HttpServlet {
                 case "/cliente/lista":
                     listaCliente(request, response);
                     break;
-                case "/listaProfissional":
+                case "/profissional":
+                    homeProfissional(request, response);
+                    break;
+                case "/profissional/pagina_cadastro":
+                    paginaCadastroProfissional(request, response);
+                    break;
+                case "/profissional/cadastra":
+                    cadastraProfissional(request, response);
+                    break;
+                case "/profissional/lista":
                     listaProfissional(request, response);
+                    break;
+                case "/profissional/remover":
+                    removeProfissional(request, response);
+                    break;
+                    case "/profissional/editar":
+                    paginaEdicaoProfissional(request, response);
+                    break;
+                case "/profissional/atualizar":
+                    atualizarProfissional(request, response);
                     break;
             }
         } catch (RuntimeException | IOException | ServletException e) {
@@ -199,12 +216,114 @@ public class AdminController extends HttpServlet {
 
     }
 
+    private void homeProfissional(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/profissionais_home.jsp");
+        dispatcher.forward(request, response);
+    }
+
     private void listaProfissional(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Profissional> listaProfissional = daoProfissional.selectAll();
         request.setAttribute("listaProfissional", listaProfissional);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/lista_profissionais.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void paginaCadastroProfissional(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/pagina_cadastro_profissional.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void cadastraProfissional(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+        String cpf = request.getParameter("cpf");
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String area = request.getParameter("area");
+        String especialidade = request.getParameter("especialidade");
+        String curriculo = request.getParameter("curriculo");
+
+        Profissional profissional = new Profissional(cpf, nome, email, senha, area, especialidade, curriculo);
+
+        try {
+            daoProfissional.insert(profissional);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin");
+            dispatcher.forward(request, response);
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro!");
+        }
+    }
+
+    private void removeProfissional(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String cpf = request.getParameter("cpf");
+        Profissional profissional = daoProfissional.selectByCpf(cpf);
+        daoProfissional.delete(profissional);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/admin_home.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void paginaEdicaoProfissional(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String cpf = request.getParameter("cpf");
+        Profissional profissional = daoProfissional.selectByCpf(cpf);
+        request.setAttribute("profissional", profissional);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/edicao_profissional.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void atualizarProfissional(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+
+        String cpf = request.getParameter("cpf");
+        Profissional profissional = daoProfissional.selectByCpf(cpf);
+
+        String nome = request.getParameter("nome");
+        if (nome == "") {
+            nome = profissional.getNome();
+        }
+        String email = request.getParameter("email");
+        if (email == "") {
+            email = profissional.getEmail();
+        }
+        String senha = request.getParameter("senha");
+        if (senha == "") {
+            senha = profissional.getSenha();
+        }
+
+        String area = request.getParameter("area");
+        if (area == "") {
+            area = profissional.getArea();
+        }
+
+        String especialidade = request.getParameter("especialidade");
+        if (especialidade == "") {
+            especialidade = profissional.getEspecialidade();
+        }
+
+        String curriculo = request.getParameter("curriculo");
+        if (curriculo == "") {
+            curriculo = profissional.getCurriculo();
+        }
+
+        Profissional profissional2 = new Profissional(cpf, nome, email, senha, area, especialidade, curriculo);
+        try {
+            daoProfissional.update(profissional2);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/admin_home.jsp");
+            dispatcher.forward(request, response);
+        } catch (Exception e) {
+            RequestDispatcher rd = request.getRequestDispatcher("/adm/edicao_profissional.jsp");
+            rd.forward(request, response);
+        }
+
     }
 
 }

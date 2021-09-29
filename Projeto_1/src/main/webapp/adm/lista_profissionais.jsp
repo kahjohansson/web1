@@ -23,37 +23,38 @@
 	
 	<fmt:bundle basename="messages">
 		
-	<div class="nav">
-			<h1>
-				<fmt:message key="project"/>			
-			</h1>
-			
-		</div>
 		
-		<!-- <div class="extremos">
-			<h2>
-				<fmt:message key="welcome"/>
-				${clienteLogado.nome}
-			</h2>
-			<a class="btn" href="/<%= contextPath%>/cliente/home.jsp">Home</a>		
-	
-		</div> -->
-	<p><fmt:message key="CliqueEm"/>.</p>
 	<table border="1">
 		
 		<tr>
+			<th>CPF</th>
 			<th>Nome</th>
+			<th>E-mail</th>
+			<th>Senha</th>
+			<th>Área</th>
 			<th>Especialidade</th>
+			<th>Curriculo</th>
+			<th>Ação</th>
+
 		</tr>
-		<c:forEach var="profissionais" items="${requestScope.listaProfissional}">
-			<!-- <a href="/<%= contextPath%>/consultas/agendar">
-				${profissionais.nome} - ${profissionais.especialidade}
-				<br/>
-			</a> -->
+		<c:forEach var="profissional" items="${requestScope.listaProfissional}">
 			
 			<tr>
-				<td>${profissionais.nome}</td>
-				<td>${profissionais.especialidade}</td>
+				<td>${profissional.cpf}</td>
+				<td>${profissional.nome}</td>
+				<td>${profissional.email}</td>
+				<td>${profissional.senha}</td>
+				<td>${profissional.area}</td>
+				<td>${profissional.especialidade}</td>
+				<td>${profissional.curriculo}</td>
+				<td>
+					<a href="/<%= contextPath%>/profissional/editar?cpf=${cliente.cpf}">
+					EDITAR
+					</a>
+					<a href="/<%= contextPath%>/profissional/remover?cpf=${cliente.cpf}">
+					REMOVER
+					</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

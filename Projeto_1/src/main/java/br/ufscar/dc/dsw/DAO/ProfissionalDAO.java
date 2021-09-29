@@ -4,7 +4,6 @@ import br.ufscar.dc.dsw.POJO.Profissional;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Date;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.List;
@@ -75,8 +74,6 @@ public class ProfissionalDAO extends DAO {
                 String especialidade = resultSet.getString("especialidade");
                 String curriculo = resultSet.getString("curriculo");
                 Profissional profissional = new Profissional(cpf, nome, email, senha, area,especialidade, curriculo);
-                listaProfissional.add(profissional);
-                
                 listaProfissional.add(profissional);
             }
 
@@ -158,27 +155,15 @@ public class ProfissionalDAO extends DAO {
 
     public void delete(Profissional profissional) {
 
-        String query_1 = "DELETE FROM profissionais WHERE cpf = ?";
-        String query_2 = "DELETE FROM usuarios WHERE cpf = ?";
-    	
-        
+        String query = "DELETE FROM usuarios WHERE cpf = ?";
+    	        
         try {
             Connection conn = this.getConnection();
-            PreparedStatement statement_1 = conn.prepareStatement(query_1);
-            PreparedStatement statement_2 = conn.prepareStatement(query_2);
+            PreparedStatement statement = conn.prepareStatement(query);
 
-            conn.setAutoCommit(false); // ativa modo de transação
-
-            statement_1.setString(1, profissional.getCpf());
-            statement_1.executeUpdate();
-            statement_1.close();
-
-            statement_2.setString(1, profissional.getCpf());
-            statement_2.executeUpdate();
-            statement_2.close();
-            
-            conn.commit();
-            conn.setAutoCommit(true);
+            statement.setString(1, profissional.getCpf());
+            statement.executeUpdate();
+            statement.close();
             conn.close();
 
         } catch (SQLException e) {
