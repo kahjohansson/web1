@@ -61,9 +61,11 @@ public class LoginController extends HttpServlet {
                 Cliente cliente = clienteDao.selectByCpf(cpf);
                 if (cliente != null) {
                     if (cliente.getSenha().equals(senha)) {
+                        
                         request.getSession().setAttribute("usuarioLogado", cliente);
                         request.getSession().setAttribute("tipoUsuario", "cliente");
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); //TODO: mudar rota
+                        System.out.println(cliente.getNome());
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("/consultas"); //TODO: mudar rota
 						dispatcher.forward(request, response);
                     } else {
                         erros.add("Usuário e/ou senha incorreto(s)!");

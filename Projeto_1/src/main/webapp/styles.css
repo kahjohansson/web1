@@ -51,3 +51,15 @@ body{
 a{
 	text-decoration:none;
 }
+
+.extremos{
+	display:flex;
+	justify-content:space-between;
+	margin-bottom:20px;
+	margin-top:10px;
+}
+
+
+.extremos .btn{
+	margin-right:20px;
+}

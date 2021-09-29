@@ -44,17 +44,21 @@
 		<tr>
 			<th>Nome</th>
 			<th>Especialidade</th>
+			<th>Área</th>
 		</tr>
 		<c:forEach var="profissionais" items="${requestScope.listaProfissionais}">
-			<!-- <a href="/<%= contextPath%>/consultas/agendar">
-				${profissionais.nome} - ${profissionais.especialidade}
-				<br/>
-			</a> -->
 			
 			<tr>
 				<td>${profissionais.nome}</td>
 				<td>${profissionais.especialidade}</td>
+				<td>${profissionais.area}</td>
+				<td>
+					<a href="/<%= contextPath%>/consultas/agendar?cpf=${profissionais.cpf}">
+					AGENDAR
+					</a>
+				</td>
 			</tr>
+			
 		</c:forEach>
 	</table>
     </fmt:bundle>
