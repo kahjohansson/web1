@@ -55,48 +55,31 @@ public class ConsultaController extends HttpServlet {
             	case "/agendar":
             		agendar(request,response);
             		break;
-            	case "/insere":
-            		insereConsulta(request, response);
-            		break;
-            	// case "/x":
-            	// 	RequestDispatcher dispatcher = request.getRequestDispatcher("/consulta/x.jsp");
-            	// 	dispatcher.forward(request, response);
-            	
+                case "/x":
+            		RequestDispatcher dispatcher = request.getRequestDispatcher("/x.jsp");
+            		dispatcher.forward(request, response);
+            	// case "/insere":
+            	// 	insereConsulta(request, response);
+            	// 	break;
             }
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
         
+
+        RequestDispatcher rd = request.getRequestDispatcher("/profissional/lista");
+        rd.forward(request, response);
+
     }
 	private void agendar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Cliente clienteLogado = (Cliente) request.getSession().getAttribute("clienteLogado");
-
-		String prof = request.getPathInfo();
-		request.setAttribute("prof", prof);
-		Erro erros = new Erro();
-		if (clienteLogado == null) {
-		  erros.add("Precisa estar logado para acessar essa página.");
-	      request.setAttribute("mensagens", erros);
-	      String URL = "/login.jsp";
-	      RequestDispatcher rd = request.getRequestDispatcher(URL);
-	      rd.forward(request, response);
-	      return;
-		}
-		
-		List<Profissional> listaProfissionais = daoProfissional.selectAll();
-		request.setAttribute("listaProfissionais",listaProfissionais);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/consulta/agendar.jsp");
-		dispatcher.forward(request, response);
-	}
-	
-private void insereConsulta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+			
 	Erro erros = new Erro();
-	Cliente clienteLogado = (Cliente) request.getSession().getAttribute("clienteLogado");
-	
-	if (clienteLogado == null) {
-		erros.add("Precisa estar logado para acessar essa página.");
+    
+    Cliente clienteLogado = (Cliente) request.getSession().getAttribute("usuarioLogado");
+    
+    
+	if (request.getSession().getAttribute("tipoUsuario") != "cliente" || clienteLogado == null) {
+		erros.add("Precisa estar logado em uma conta de cliente para acessar essa página.");
 
         request.setAttribute("mensagens", erros);
         String URL = "/login.jsp";
@@ -106,10 +89,14 @@ private void insereConsulta(HttpServletRequest request, HttpServletResponse resp
 	}
 	
 	try {
-        String cpfProfissional = request.getParameter("profissional");
+        
+        request.setCharacterEncoding("UTF-8");
+
+        String cpf = request.getParameter("cpf");
+        Profissional profissional = daoProfissional.selectByCpf(cpf);
+
         String dataInput = request.getParameter("data");
         String horario = request.getParameter("horario");
-
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         Date data = dateFormat.parse(dataInput + " " + horario + ":00");
@@ -118,7 +105,7 @@ private void insereConsulta(HttpServletRequest request, HttpServletResponse resp
 
         String cpfCliente = clienteLogado.getCpf();
         
-        Consulta consulta = new Consulta(cpfCliente, cpfProfissional , data);
+        Consulta consulta = new Consulta(cpfCliente, profissional.getCpf() , data);
 
        List<Consulta> listaConsulta =  dao.getByDate(consulta);
        boolean existe = false;
@@ -128,7 +115,7 @@ private void insereConsulta(HttpServletRequest request, HttpServletResponse resp
     		   existe = true;
     		   
     	   }
-           if(consultaX.getCpfProfissional().equals(cpfProfissional)){
+           if(consultaX.getCpfProfissional().equals(profissional.getCpf())){
         	   existe = true;
            }
        }
@@ -157,10 +144,11 @@ private void insereConsulta(HttpServletRequest request, HttpServletResponse resp
         return;
 	}
 
-	String URL = "/cliente/home.jsp"; 
+	String URL = "/index.jsp"; 
 	RequestDispatcher rd = request.getRequestDispatcher(URL);
 	rd.forward(request, response);
 
    
 	}
 }
+	
