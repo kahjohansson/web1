@@ -26,24 +26,9 @@
 			
 		</div>
 		
-		<div class="extremos">
-			<h2>
-				<a href="/<%= contextPath%>/"><fmt:message key="retornar"/></a>
-			</h2>
-			<a class="btn" href="/<%= contextPath%>/index.jsp">Home</a>		
-		</div>
-		
-		<c:if test="${mensagens.existeErros}">
-            <div id="erro">
-                <ul>
-                    <c:forEach var="erro" items="${mensagens.erros}">
-                        <li> ${erro} </li>
-                    </c:forEach>
-                </ul>
-            </div>
-        </c:if>
+		Operação realizada com sucesso!
         
-        <a href="/<%= contextPath%>/"><fmt:message key="backToLogin"/></a>
+        <a href="/<%= contextPath%>/"><fmt:message key="backToHome"/></a>
 		
 
     </fmt:bundle>

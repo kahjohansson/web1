@@ -9,7 +9,7 @@
 <head>
     <title>Login</title>
     <meta charset="UTF-8">
-    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet" type="text/css"/>
 
 </head>
 
@@ -25,6 +25,16 @@
 			</h1>
 			
 		</div>
+
+		<c:if test="${mensagens.existeErros}">
+            <div id="erro">
+                <ul>
+                    <c:forEach var="erro" items="${mensagens.erros}">
+                        <li> ${erro} </li>
+                        </c:forEach>
+                </ul>
+            </div>
+        </c:if>
 		
 		<fieldset id="login">
 			<p><fmt:message key="cliente"/></p>

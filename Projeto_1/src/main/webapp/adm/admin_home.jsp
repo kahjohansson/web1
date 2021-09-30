@@ -20,17 +20,10 @@
 	<fmt:bundle basename="messages">
 		<div class="nav">
 			<h1>
-				<fmt:message key="project"/>			
+				<fmt:message key="admin_area"/>			
 			</h1>
 			
-		</div>
-		
-        <div class="sub_nav">
-            <h1>
-                <fmt:message key="welcome"/>
-            </h1>
-        </div>
-		
+		</div>		
 		
 		<div class="btns-sup">
 			<div class=btns>

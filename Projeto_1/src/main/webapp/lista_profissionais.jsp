@@ -38,6 +38,7 @@
 			<a class="btn" href="/<%= contextPath%>/cliente/home.jsp">Home</a>		
 	
 		</div> -->
+		${sessionScope.usuarioLogado.nome}
 	<p><fmt:message key="CliqueEm"/>.</p>
 	<table border="1">
 		

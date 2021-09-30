@@ -63,3 +63,10 @@ a{
 .extremos .btn{
 	margin-right:20px;
 }
+
+#erro {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid red;
+    background-color: beige;
+}

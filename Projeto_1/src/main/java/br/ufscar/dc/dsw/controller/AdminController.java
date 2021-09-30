@@ -49,61 +49,73 @@ public class AdminController extends HttpServlet {
         }
 
         Erro erros = new Erro();
+        String tipoUsuario = (String) request.getSession().getAttribute("tipoUsuario");
 
-        try {
-            switch (action) {
-                case "/cliente":
-                    homeCliente(request, response);
-                    break;
-                case "/cliente/pagina_cadastro":
-                    paginaCadastroCliente(request, response);
-                    break;
-                case "/cliente/cadastra":
-                    cadastraCliente(request, response);
-                    break;
-                case "/cliente/editar":
-                    paginaEdicaoCliente(request, response);
-                    break;
-                case "/cliente/atualizar":
-                    atualizarCliente(request, response);
-                    break;
-                case "/cliente/remover":
-                    removeCliente(request, response);
-                    break;
-                case "/cliente/lista":
-                    listaCliente(request, response);
-                    break;
-                case "/profissional":
-                    homeProfissional(request, response);
-                    break;
-                case "/profissional/pagina_cadastro":
-                    paginaCadastroProfissional(request, response);
-                    break;
-                case "/profissional/cadastra":
-                    cadastraProfissional(request, response);
-                    break;
-                case "/profissional/lista":
-                    listaProfissional(request, response);
-                    break;
-                case "/profissional/remover":
-                    removeProfissional(request, response);
-                    break;
+        if (tipoUsuario == "") {
+            response.sendRedirect(request.getContextPath());
+        } else if (tipoUsuario == "administrador") {
+            try {
+                switch (action) {
+                    case "/cliente":
+                        homeCliente(request, response);
+                        break;
+                    case "/cliente/pagina_cadastro":
+                        paginaCadastroCliente(request, response);
+                        break;
+                    case "/cliente/cadastra":
+                        cadastraCliente(request, response);
+                        break;
+                    case "/cliente/editar":
+                        paginaEdicaoCliente(request, response);
+                        break;
+                    case "/cliente/atualizar":
+                        atualizarCliente(request, response);
+                        break;
+                    case "/cliente/remover":
+                        removeCliente(request, response);
+                        break;
+                    case "/cliente/lista":
+                        listaCliente(request, response);
+                        break;
+                    case "/profissional":
+                        homeProfissional(request, response);
+                        break;
+                    case "/profissional/pagina_cadastro":
+                        paginaCadastroProfissional(request, response);
+                        break;
+                    case "/profissional/cadastra":
+                        cadastraProfissional(request, response);
+                        break;
+                    case "/profissional/lista":
+                        listaProfissional(request, response);
+                        break;
+                    case "/profissional/remover":
+                        removeProfissional(request, response);
+                        break;
                     case "/profissional/editar":
-                    paginaEdicaoProfissional(request, response);
-                    break;
-                case "/profissional/atualizar":
-                    atualizarProfissional(request, response);
-                    break;
+                        paginaEdicaoProfissional(request, response);
+                        break;
+                    case "/profissional/atualizar":
+                        atualizarProfissional(request, response);
+                        break;
+                    default:
+                        RequestDispatcher rd = request.getRequestDispatcher("/adm/admin_home.jsp");
+                        rd.forward(request, response);
+                        break;
+                }
+            } catch (RuntimeException | IOException | ServletException e) {
+                throw new ServletException(e);
             }
-        } catch (RuntimeException | IOException | ServletException e) {
-            throw new ServletException(e);
+        } else {
+            erros.add("Acesso não autorizado!");
+            erros.add("Somente administradores podem ter acesso a essa página!");
+            request.setAttribute("mensagens", erros);
+            RequestDispatcher rd = request.getRequestDispatcher("/x.jsp");
+    		rd.forward(request, response);
         }
 
-        request.getSession().invalidate();
-        request.setAttribute("mensagens", erros);
-
-        RequestDispatcher rd = request.getRequestDispatcher("/adm/admin_home.jsp");
-        rd.forward(request, response);
+        // request.getSession().invalidate();
+        
 
     }
 
@@ -125,6 +137,7 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/pagina_cadastro_cliente.jsp");
         dispatcher.forward(request, response);
+        // response.sendRedirect("/adm/pagina_cadastro_cliente.jsp");
     }
 
     private void cadastraCliente(HttpServletRequest request, HttpServletResponse response)
@@ -143,7 +156,7 @@ public class AdminController extends HttpServlet {
 
         try {
             daoCliente.insert(cliente);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/listaCliente");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/sucesso.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
             System.out.println("Ocorreu um erro!");

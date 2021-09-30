@@ -19,20 +19,13 @@
 				<fmt:message key="project"/>			
 			</h1>
 			
-		</div>
-		
-        <div class="sub_nav">
-            <h1>
-                <fmt:message key="welcome"/>
-            </h1>
-        </div>
-		
+		</div>		
 		
 		<div class="btns-sup">
 			<div class=btns>
 				<h2>
 					<fmt:message key="welcome"/>
-					${usuarioLogado.nome}
+					${sessionScope.usuarioLogado.nome}
 				</h2>
 
 				<a href="login">

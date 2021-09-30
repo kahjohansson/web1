@@ -39,74 +39,80 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
 
         // if (request.getParameter("login_") != null) {
-            login(request, response);
+        login(request, response);
         // }
 
     }
 
-    private void login(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Erro erros = new Erro();
         request.setCharacterEncoding("UTF-8");
         String email = request.getParameter("email");
-		String senha = request.getParameter("senha");
+        String senha = request.getParameter("senha");
 
-        try{
-            UsuarioDAO usuarioDao = new UsuarioDAO();
-            String cpf = usuarioDao.selectByEmail(email);
+        if (request.getParameter("login_") != null) {
 
-            if (cpf != null) {
-                ClienteDAO clienteDao = new ClienteDAO();
-                Cliente cliente = clienteDao.selectByCpf(cpf);
-                if (cliente != null) {
-                    if (cliente.getSenha().equals(senha)) {
-                        
-                        request.getSession().setAttribute("usuarioLogado", cliente);
-                        request.getSession().setAttribute("tipoUsuario", "cliente");
-                        System.out.println(cliente.getNome());
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("/consultas"); //TODO: mudar rota
-						dispatcher.forward(request, response);
+            try {
+                UsuarioDAO usuarioDao = new UsuarioDAO();
+                String cpf = usuarioDao.selectByEmail(email);
+
+                if (cpf != null) {
+                    ClienteDAO clienteDao = new ClienteDAO();
+                    Cliente cliente = clienteDao.selectByCpf(cpf);
+                    if (cliente != null) {
+                        if (cliente.getSenha().equals(senha)) {
+
+                            request.getSession().setAttribute("usuarioLogado", cliente);
+                            request.getSession().setAttribute("tipoUsuario", "cliente");
+                            System.out.println(cliente.getNome());
+                            // response.sendRedirect("/consultas");
+                            RequestDispatcher dispatcher = request.getRequestDispatcher("/consultas"); // TODO: mudar
+                                                                                                       // rota
+                            dispatcher.forward(request, response);
+                        } else {
+                            erros.add("Usuário e/ou senha incorreto(s)!");
+                        }
                     } else {
-                        erros.add("Usuário e/ou senha incorreto(s)!");
+                        ProfissionalDAO profissionalDao = new ProfissionalDAO();
+                        Profissional profissional = profissionalDao.selectByCpf(cpf);
+                        if (profissional != null) {
+                            if (profissional.getSenha().equals(senha)) {
+                                request.getSession().setAttribute("usuarioLogado", profissional);
+                                request.getSession().setAttribute("tipoUsuario", "profissional");
+                                RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); // TODO:
+                                                                                                           // mudar rota
+                                dispatcher.forward(request, response);
+                            } else {
+                                erros.add("Usuário e/ou senha incorreto(s)!");
+                            }
+                        } else {
+                            AdministradorDAO administradorDao = new AdministradorDAO();
+                            Administrador administrador = administradorDao.selectByCpf(cpf);
+                            if (administrador.getSenha().equals(senha)) {
+                                request.getSession().setAttribute("usuarioLogado", administrador);
+                                request.getSession().setAttribute("tipoUsuario", "administrador");
+                                RequestDispatcher dispatcher = request.getRequestDispatcher("/admin"); // TODO: mudar
+                                                                                                       // rota
+                                dispatcher.forward(request, response);
+                            } else {
+                                erros.add("Usuário e/ou senha incorreto(s)!");
+                            }
+                        }
                     }
                 } else {
-                    ProfissionalDAO profissionalDao = new ProfissionalDAO();
-                    Profissional profissional = profissionalDao.selectByCpf(cpf);
-                    if (profissional != null) {
-                        if (profissional.getSenha().equals(senha)) {
-                            request.getSession().setAttribute("usuarioLogado", profissional);
-                            request.getSession().setAttribute("tipoUsuario", "profissional");
-                            RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); //TODO: mudar rota
-                            dispatcher.forward(request, response);
-                        } else {
-                            erros.add("Usuário e/ou senha incorreto(s)!");
-                        }
-                    } else {
-                        AdministradorDAO administradorDao = new AdministradorDAO();
-                        Administrador administrador = administradorDao.selectByCpf(cpf);
-                        if (administrador.getSenha().equals(senha)) {
-                            request.getSession().setAttribute("usuarioLogado", administrador);
-                            request.getSession().setAttribute("tipoUsuario", "administrador");
-                            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin"); //TODO: mudar rota
-                            dispatcher.forward(request, response);
-                        } else {
-                            erros.add("Usuário e/ou senha incorreto(s)!");
-                        }
-                    }
+                    erros.add("Usuário não cadastrado!");
                 }
-            } else {
-                erros.add("Usuário não cadastrado!");
-            }
 
-        } catch (Exception e) {
-            System.out.println("Ocorreu um erro!");
+            } catch (Exception e) {
+                System.out.println("Ocorreu um erro!");
+            }
         }
 
-        request.getSession().invalidate();
-		request.setAttribute("mensagens", erros);
-		RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-		rd.forward(request, response);
+        // request.getSession().invalidate();
+        request.setAttribute("mensagens", erros);
+        RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+        rd.forward(request, response);
     }
 
 }
