@@ -4,6 +4,7 @@ import br.ufscar.dc.dsw.POJO.Consulta;
 import br.ufscar.dc.dsw.POJO.Cliente;
 import br.ufscar.dc.dsw.POJO.Profissional;
 import br.ufscar.dc.dsw.util.Erro;
+import br.ufscar.dc.dsw.DAO.ClienteDAO;
 import br.ufscar.dc.dsw.DAO.ConsultaDAO;
 import br.ufscar.dc.dsw.DAO.ProfissionalDAO;
 
@@ -29,12 +30,14 @@ public class ConsultaController extends HttpServlet {
     private static final long serialVersionUID = 1L; 
     private ConsultaDAO dao;
     private ProfissionalDAO daoProfissional;
+    private ClienteDAO daoCliente;
 
    
     @Override
     public void init() {
         dao = new ConsultaDAO();
         daoProfissional = new ProfissionalDAO();
+        daoCliente = new ClienteDAO();
     }
 
     @Override
@@ -57,6 +60,9 @@ public class ConsultaController extends HttpServlet {
             		break;
                 case "/insere":
             		insereConsulta(request, response);
+            		break;
+                case "/listar":
+            		listaConsulta(request, response);
             		break;
                 case "/x":
             		RequestDispatcher dispatcher = request.getRequestDispatcher("/x.jsp");
@@ -126,7 +132,7 @@ public class ConsultaController extends HttpServlet {
         Profissional profissional = daoProfissional.selectByCpf(cpf);
 
         System.out.println(profissional.getNome());
-        
+
         String dataInput = request.getParameter("data");
         String horario = request.getParameter("horario");
 
@@ -140,6 +146,9 @@ public class ConsultaController extends HttpServlet {
         Consulta consulta = new Consulta(cpfCliente, profissional.getCpf() , data);
 
        List<Consulta> listaConsulta =  dao.getByDate(consulta);
+
+      
+
        boolean existe = false;
        
        for(Consulta consultaX: listaConsulta) {
@@ -175,12 +184,35 @@ public class ConsultaController extends HttpServlet {
 	    rd.forward(request, response);
         return;
 	}
-
-	String URL = "/index.jsp";   //jogar para página de lista consultas quando existir
+   
+	String URL = "/consultas/listar";   //jogar para página de lista consultas quando existir
 	RequestDispatcher rd = request.getRequestDispatcher(URL);
 	rd.forward(request, response);
-
    
 	}
+
+    private void listaConsulta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Erro erros = new Erro();
+        Cliente cliente = (Cliente) request.getSession().getAttribute("usuarioLogado");
+
+        Cliente clienteLogado = daoCliente.selectByCpf(cliente.getCpf());
+        if (clienteLogado!=null){
+            List<Consulta> listaConsulta =  dao.getByCpfCliente(clienteLogado.getCpf());
+            
+            request.getSession().setAttribute("listaConsulta", listaConsulta);
+            request.getSession().setAttribute("profissional", daoProfissional.selectByCpf(listaConsulta.get(0).getCpfProfissional()));
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/listar_consultas_cliente.jsp");
+            dispatcher.forward(request, response);
+        }
+        else{
+            erros.add("Precisa estar logado em uma conta de cliente para acessar essa página.");
+            request.setAttribute("mensagens", erros);
+            String URL = "/login.jsp";
+            RequestDispatcher rd = request.getRequestDispatcher(URL);
+            rd.forward(request, response);
+            return;
+        }
+
+    }
 }
 	
