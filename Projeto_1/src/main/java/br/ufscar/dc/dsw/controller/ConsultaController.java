@@ -55,6 +55,9 @@ public class ConsultaController extends HttpServlet {
             	case "/agendar":
             		agendar(request,response);
             		break;
+                case "/insere":
+            		insereConsulta(request, response);
+            		break;
                 case "/x":
             		RequestDispatcher dispatcher = request.getRequestDispatcher("/x.jsp");
             		dispatcher.forward(request, response);
@@ -71,7 +74,33 @@ public class ConsultaController extends HttpServlet {
         rd.forward(request, response);
 
     }
-	private void agendar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void agendar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+        Cliente clienteLogado = (Cliente) request.getSession().getAttribute("usuarioLogado");
+
+		String prof = request.getPathInfo();
+		request.setAttribute("prof", prof);
+		Erro erros = new Erro();
+    
+        if (request.getSession().getAttribute("tipoUsuario") != "cliente" || clienteLogado == null) {
+            erros.add("Precisa estar logado em uma conta de cliente para acessar essa página.");
+    
+            request.setAttribute("mensagens", erros);
+            String URL = "/login.jsp";
+            RequestDispatcher rd = request.getRequestDispatcher(URL);
+            rd.forward(request, response);
+            return;
+        }
+		
+		String cpf = request.getParameter("cpf");
+        Profissional profissional = daoProfissional.selectByCpf(cpf);
+		request.setAttribute("Profissional", profissional);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/agendar.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void insereConsulta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 	Erro erros = new Erro();
     
@@ -93,8 +122,11 @@ public class ConsultaController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String cpf = request.getParameter("cpf");
+        
         Profissional profissional = daoProfissional.selectByCpf(cpf);
 
+        System.out.println(profissional.getNome());
+        
         String dataInput = request.getParameter("data");
         String horario = request.getParameter("horario");
 
@@ -144,7 +176,7 @@ public class ConsultaController extends HttpServlet {
         return;
 	}
 
-	String URL = "/index.jsp"; 
+	String URL = "/index.jsp";   //jogar para página de lista consultas quando existir
 	RequestDispatcher rd = request.getRequestDispatcher(URL);
 	rd.forward(request, response);
 

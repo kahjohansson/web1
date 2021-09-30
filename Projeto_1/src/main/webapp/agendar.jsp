@@ -44,11 +44,11 @@
 					</label>	
 					<br/>
 						
-						<select name="profissional">
-							<c:forEach var="profissional" items="${requestScope.listaProfissionais}">
-								<option value="${profissional.cpf}">${profissional.nome}, ${profissional.especialidade}</option>
-							</c:forEach>
-						</select> <br/>
+						<p>
+							${Profissional.nome}, ${Profissional.especialidade}	
+						</p>
+						<input type="hidden" name="cpf" value="${Profissional.cpf}">  
+						<br/>
 						
 						<br/>
 							
