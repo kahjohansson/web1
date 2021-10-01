@@ -10,6 +10,7 @@
     <title>Home</title>
     <meta charset="UTF-8">
     <link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet" type="text/css"/>
+	<link href="styles.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
@@ -27,8 +28,8 @@
 		</div>
 		
 		Operação realizada com sucesso!
-        
-        <a href="/<%= contextPath%>/"><fmt:message key="backToHome"/></a>
+	</br></br>
+        <a href="/<%= contextPath%>/adm/admin_home.jsp"><fmt:message key="backToHome"/></a>
 		
 
     </fmt:bundle>

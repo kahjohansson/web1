@@ -9,7 +9,8 @@
 <head>
     <title>Cadastro Profissional</title>
     <meta charset="UTF-8">
-    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet" type="text/css"/>
+	<link href="styles.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
@@ -27,7 +28,7 @@
 		
 			
 		<fieldset>
-			<form name="cadastro" action="/<%= contextPath%>/admin/profissional/cadastra" method="POST">
+			<form name="cadastro" action="/<%= contextPath%>/admin/profissional/pre_cadastro" method="POST">
 				<div>
 					<div>
 						<p>CPF</p> 							
@@ -47,12 +48,9 @@
                         
                         <p><fmt:message key="espec"/></p> 		
                         <input type="text"  name="especialidade" value="${profissional.especialidade}"/> 
-                        
-                        <p><fmt:message key="resume"/></p> 		
-                        <input type="text"  name="curriculo" value="${profissional.curriculo}"/> 
                      
 					</div>
-					<input type="submit" name="register" value=<fmt:message key="register"/> />
+					<input type="submit" name="register" value=<fmt:message key="forward"/> />
 				</div>
 			</form>
 		</fieldset>

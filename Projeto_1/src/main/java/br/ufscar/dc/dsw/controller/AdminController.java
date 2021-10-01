@@ -98,6 +98,9 @@ public class AdminController extends HttpServlet {
                     case "/profissional/atualizar":
                         atualizarProfissional(request, response);
                         break;
+                    case "/profissional/pre_cadastro":
+                        armazenaAtributos(request, response);
+                        break;
                     default:
                         RequestDispatcher rd = request.getRequestDispatcher("/adm/admin_home.jsp");
                         rd.forward(request, response);
@@ -111,11 +114,10 @@ public class AdminController extends HttpServlet {
             erros.add("Somente administradores podem ter acesso a essa página!");
             request.setAttribute("mensagens", erros);
             RequestDispatcher rd = request.getRequestDispatcher("/x.jsp");
-    		rd.forward(request, response);
+            rd.forward(request, response);
         }
 
         // request.getSession().invalidate();
-        
 
     }
 
@@ -143,6 +145,8 @@ public class AdminController extends HttpServlet {
     private void cadastraCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Erro erros = new Erro();
+
         request.setCharacterEncoding("UTF-8");
         String cpf = request.getParameter("cpf");
         String nome = request.getParameter("nome");
@@ -156,20 +160,33 @@ public class AdminController extends HttpServlet {
 
         try {
             daoCliente.insert(cliente);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/sucesso.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/sucesso.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
-            System.out.println("Ocorreu um erro!");
+            erros.add("Ocorreu um erro ao processar a operação!");
+            request.setAttribute("mensagens", erros);
+            RequestDispatcher rd = request.getRequestDispatcher("/x.jsp");
+            rd.forward(request, response);
         }
     }
 
     private void removeCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String cpf = request.getParameter("cpf");
-        Cliente cliente = daoCliente.selectByCpf(cpf);
-        daoCliente.delete(cliente);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/admin_home.jsp");
-        dispatcher.forward(request, response);
+
+        Erro erros = new Erro();
+
+        try {
+            String cpf = request.getParameter("cpf");
+            Cliente cliente = daoCliente.selectByCpf(cpf);
+            daoCliente.delete(cliente);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/sucesso.jsp");
+            dispatcher.forward(request, response);
+        } catch (Exception e) {
+            erros.add("Ocorreu um erro ao processar a operação!");
+            request.setAttribute("mensagens", erros);
+            RequestDispatcher rd = request.getRequestDispatcher("/x.jsp");
+            rd.forward(request, response);
+        }
     }
 
     private void paginaEdicaoCliente(HttpServletRequest request, HttpServletResponse response)
@@ -184,6 +201,8 @@ public class AdminController extends HttpServlet {
 
     private void atualizarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        Erro erros = new Erro();
 
         request.setCharacterEncoding("UTF-8");
 
@@ -223,10 +242,12 @@ public class AdminController extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/admin_home.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
-            RequestDispatcher rd = request.getRequestDispatcher("/adm/edicao_cliente.jsp");
+            erros.add("Ocorreu um erro ao processar a operação!");
+            erros.add(e.getMessage());
+            request.setAttribute("mensagens", erros);
+            RequestDispatcher rd = request.getRequestDispatcher("/x.jsp");
             rd.forward(request, response);
         }
-
     }
 
     private void homeProfissional(HttpServletRequest request, HttpServletResponse response)
@@ -247,29 +268,6 @@ public class AdminController extends HttpServlet {
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/pagina_cadastro_profissional.jsp");
         dispatcher.forward(request, response);
-    }
-
-    private void cadastraProfissional(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        request.setCharacterEncoding("UTF-8");
-        String cpf = request.getParameter("cpf");
-        String nome = request.getParameter("nome");
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-        String area = request.getParameter("area");
-        String especialidade = request.getParameter("especialidade");
-        String curriculo = request.getParameter("curriculo");
-
-        Profissional profissional = new Profissional(cpf, nome, email, senha, area, especialidade, curriculo);
-
-        try {
-            daoProfissional.insert(profissional);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin");
-            dispatcher.forward(request, response);
-        } catch (Exception e) {
-            System.out.println("Ocorreu um erro!");
-        }
     }
 
     private void removeProfissional(HttpServletRequest request, HttpServletResponse response)
@@ -337,6 +335,69 @@ public class AdminController extends HttpServlet {
             rd.forward(request, response);
         }
 
+    }
+
+    private void armazenaAtributos(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Erro erros = new Erro();
+
+        try {
+
+            request.setCharacterEncoding("UTF-8");
+            String cpf = request.getParameter("cpf");
+            String nome = request.getParameter("nome");
+            String email = request.getParameter("email");
+            String senha = request.getParameter("senha");
+            String area = request.getParameter("area");
+            String especialidade = request.getParameter("especialidade");
+            String curriculo = "-";
+
+            Profissional profissional = new Profissional(cpf, nome, email, senha, area, especialidade, curriculo);
+
+            request.getSession().setAttribute("profissionalemcadastro", profissional);
+            RequestDispatcher rd = request.getRequestDispatcher("/adm/upload_curriculo_profissional.jsp");
+            rd.forward(request, response);
+
+        } catch (Exception e) {
+            erros.add("Ocorreu um erro!");
+            erros.add(e.getMessage());
+            request.setAttribute("mensagens", erros);
+            RequestDispatcher rd = request.getRequestDispatcher("/x.jsp");
+            rd.forward(request, response);
+        }
+
+    }
+
+    private void cadastraProfissional(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Erro erros = new Erro();
+
+        try {
+
+            Profissional profissional = (Profissional) request.getSession().getAttribute("profissionalemcadastro");
+            System.out.println("Nome do profissional: " + profissional.getNome());
+
+            String curriculo;
+            curriculo = (String) request.getSession().getAttribute("caminhocurriculo");
+            System.out.println("Caminho do currículo: " + curriculo);
+            profissional.setCurriculo(curriculo);
+
+            daoProfissional.insert(profissional);
+            request.removeAttribute("profissional_em_cadastro");
+            request.removeAttribute("caminho_curriculo");
+
+        } catch (Exception e) {
+            erros.add("Ocorreu um erro!");
+            erros.add(e.toString());
+            request.setAttribute("mensagens", erros);
+            RequestDispatcher rd = request.getRequestDispatcher("/x.jsp");
+            rd.forward(request, response);
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/sucesso.jsp");
+        dispatcher.forward(request, response);
     }
 
 }
