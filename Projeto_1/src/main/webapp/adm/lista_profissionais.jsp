@@ -10,7 +10,6 @@
     <title>Home</title>
     <meta charset="UTF-8">
     <link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet" type="text/css"/>
-    <link href="/styles.css" rel="stylesheet" type="text/css"/>
     <script src="ajaxNome.js"></script>
 </head>
 
@@ -48,10 +47,10 @@
 				<td>${profissional.especialidade}</td>
 				<td>${profissional.curriculo}</td>
 				<td>
-					<a href="/<%= contextPath%>/profissional/editar?cpf=${cliente.cpf}">
+					<a href="/<%= contextPath%>/admin/profissional/editar?cpf=${profissional.cpf}">
 					EDITAR
 					</a>
-					<a href="/<%= contextPath%>/profissional/remover?cpf=${cliente.cpf}">
+					<a href="/<%= contextPath%>/admin/profissional/remover?cpf=${profissional.cpf}">
 					REMOVER
 					</a>
 				</td>

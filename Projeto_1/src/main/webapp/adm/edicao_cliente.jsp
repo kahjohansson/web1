@@ -9,6 +9,8 @@
 <head>
     <title>Cadastro Cliente</title>
     <meta charset="UTF-8">
+	<link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet" type="text/css"/>
+	<link href="styles.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
@@ -23,7 +25,7 @@
 		<legend><fmt:message key="welcome"/></legend>
 			
 
-			<form name="edicao" action="/<%= contextPath%>/cliente/atualizar" method="POST">
+			<form name="edicao" action="/<%= contextPath%>/admin/cliente/atualizar" method="POST">
 					<fieldset>
 						<legend> EDICAO DE CLIENTES </legend>
 						
