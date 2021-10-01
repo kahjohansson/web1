@@ -80,7 +80,7 @@ public class LoginController extends HttpServlet {
                             if (profissional.getSenha().equals(senha)) {
                                 request.getSession().setAttribute("usuarioLogado", profissional);
                                 request.getSession().setAttribute("tipoUsuario", "profissional");
-                                RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp"); // TODO:
+                                RequestDispatcher dispatcher = request.getRequestDispatcher("/consultas/listar_p"); // TODO:
                                                                                                            // mudar rota
                                 dispatcher.forward(request, response);
                             } else {

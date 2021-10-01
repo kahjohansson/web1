@@ -11,11 +11,7 @@ import br.ufscar.dc.dsw.DAO.ProfissionalDAO;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import java.io.IOException;
-
-import java.sql.Timestamp;
-
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -65,19 +61,22 @@ public class ConsultaController extends HttpServlet {
                 case "/listar":
                     listaConsulta(request, response);
                     break;
+                case "/listar_p":
+                    listaConsultaProfissional(request, response);
+                    break;
                 case "/x":
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/x.jsp");
                     dispatcher.forward(request, response);
                     // case "/insere":
                     // insereConsulta(request, response);
                     // break;
+                default:
+                    RequestDispatcher rd = request.getRequestDispatcher("/profissional/lista");
+                    rd.forward(request, response);
             }
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
-
-        RequestDispatcher rd = request.getRequestDispatcher("/profissional/lista");
-        rd.forward(request, response);
 
     }
 
@@ -193,17 +192,43 @@ public class ConsultaController extends HttpServlet {
         Erro erros = new Erro();
         Cliente cliente = (Cliente) request.getSession().getAttribute("usuarioLogado");
 
-        // Cliente clienteLogado = daoCliente.selectByCpf(cliente.getCpf());
         if (cliente != null) {
             try {
-                // List<String> listaConsulta = dao.ConsultaCliente(cliente.getCpf());
                 List<ConsultaResultado> listaConsulta = dao.ConsultaCliente(cliente.getCpf());
-                // System.out.println(listaConsulta.get(0).getNome());
                 request.getSession().setAttribute("listaConsulta", listaConsulta);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/listar_consultas_cliente.jsp");
                 dispatcher.forward(request, response);
             } catch (Exception e) {
                 erros.add("Erro no DAO provavelmente.");
+                erros.add(e.getMessage());
+                request.setAttribute("mensagens", erros);
+                RequestDispatcher rd = request.getRequestDispatcher("/x.jsp");
+                rd.forward(request, response);
+            }
+        } else {
+            erros.add("Precisa estar logado em uma conta de cliente para acessar essa página.");
+            request.setAttribute("mensagens", erros);
+            String URL = "/login.jsp";
+            RequestDispatcher rd = request.getRequestDispatcher(URL);
+            rd.forward(request, response);
+            return;
+        }
+
+    }
+
+    private void listaConsultaProfissional(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Erro erros = new Erro();
+        Profissional profissional = (Profissional) request.getSession().getAttribute("usuarioLogado");
+
+        if (profissional != null) {
+            try {
+                List<ConsultaResultado> listaConsulta = dao.ConsultaProfissional(profissional.getCpf());
+                request.getSession().setAttribute("listaConsulta", listaConsulta);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/listar_consultas_profissional.jsp");
+                dispatcher.forward(request, response);
+            } catch (Exception e) {
+                erros.add("Erro em operação do banco de dados!");
                 erros.add(e.getMessage());
                 request.setAttribute("mensagens", erros);
                 RequestDispatcher rd = request.getRequestDispatcher("/x.jsp");

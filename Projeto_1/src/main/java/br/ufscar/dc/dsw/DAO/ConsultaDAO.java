@@ -177,6 +177,37 @@ public class ConsultaDAO extends DAO {
         return listaConsulta;
     }
 
+    public List<ConsultaResultado> ConsultaProfissional(String cpfProfissional) {
+
+        List<ConsultaResultado> listaConsulta = new ArrayList<>();
+        
+        String sql = "SELECT * from consultas INNER JOIN usuarios ON consultas.cpfCliente = usuarios.cpf where consultas.cpfProfissional = ?";
+
+        try {
+            // Conectando no banco e realizando consulta
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, cpfProfissional);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            // Convertendo resultados para a classe interna Consulta
+            while (resultSet.next()) {
+                String nome = resultSet.getString("usuarios.nome");
+                Date data = new Date(resultSet.getTimestamp("consultas.data").getTime());
+                ConsultaResultado c = new ConsultaResultado(nome, data.toString());
+                listaConsulta.add(c);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaConsulta;
+    }
+
     public List<Consulta> getByCpfProfissional(String cpfProfissional) {
         List<Consulta> listaConsulta = new ArrayList<>();
         

@@ -2,59 +2,69 @@
 	<%@ page isELIgnored="false" %>
 		<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 			<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-			<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+				<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-				<!DOCTYPE html>
-				<html>
+					<!DOCTYPE html>
+					<html>
 
-				<head>
-					<title>Home</title>
-					<meta charset="UTF-8">
-					<link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet" type="text/css" />
-				</head>
+					<head>
+						<title>Home</title>
+						<meta charset="UTF-8">
+						<link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet" type="text/css" />
+					</head>
 
-				<body>
+					<body>
 
-					<% String contextPath=request.getContextPath().replace("/", "" ); %>
-
-
-						<fmt:bundle basename="messages">
-							<div class="nav">
-								<h1>
-									<fmt:message key="project" />
-								</h1>
-
-							</div>
-
-							<div class="extremos">
-								<h2>
-									<fmt:message key="welcome" />
-									${clienteLogado.nome}
-								</h2>
-							</div>
-
-							<table border="1">
-
-								<tr>
-									<th>Nome</th>
-									<th>Data</th>
-
-								</tr>
+						<% String contextPath=request.getContextPath().replace("/", "" ); %>
 
 
-								<c:forEach var="i" items="${listaConsulta}">
+							<fmt:bundle basename="messages">
+								<div class="nav">
+									<h1>
+										<fmt:message key="project" />
+									</h1>
+
+								</div>
+
+								<div class="nav">
+									<h2>
+										<fmt:message key="appointment_list" />
+									</h2>
+
+								</div>
+
+								<fmt:message key="Hi" />, ${usuarioLogado.nome},
+								<fmt:message key="your_appointments" />
+
+								<div class="extremos">
+									<h2>
+										<fmt:message key="welcome" />
+										${clienteLogado.nome}
+									</h2>
+								</div>
+
+								<table border="1">
 
 									<tr>
-										<td>${i.nome}</td>
-										<td>${i.data}</td>
+										<th>Nome do profissional</th>
+										<th>Horário</th>
+
 									</tr>
 
-								</c:forEach>
+
+									<c:forEach var="i" items="${listaConsulta}">
+
+										<tr>
+											<td>${i.nome}</td>
+											<td>${i.data}</td>
+										</tr>
+
+									</c:forEach>
 
 
-							</table>
+								</table>
 
-						</fmt:bundle>
-				</body>
+							</fmt:bundle>
+					</body>
 
-				</html>
+					</html>
