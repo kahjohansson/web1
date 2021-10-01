@@ -17,6 +17,7 @@ import java.util.Date;
 // import br.ufscar.dc.dsw.EmailService;
 import br.ufscar.dc.dsw.POJO.Cliente;
 import br.ufscar.dc.dsw.POJO.Consulta;
+import br.ufscar.dc.dsw.POJO.ConsultaResultado;
 import br.ufscar.dc.dsw.POJO.Profissional;
 
 
@@ -114,7 +115,67 @@ public class ConsultaDAO extends DAO {
         }
         return listaConsulta;
     }
-    
+
+    // public List<String> ConsultaCliente(String cpfCliente) {
+    //     List<String> listaConsulta = new ArrayList<>();
+        
+    //     String sql = "SELECT * from consultas INNER JOIN usuarios ON consultas.cpfProfissional = usuarios.cpf where consultas.cpfCliente = ?";
+
+    //     try {
+    //         // Conectando no banco e realizando consulta
+    //         Connection conn = this.getConnection();
+    //         PreparedStatement statement = conn.prepareStatement(sql);
+    //         statement.setString(1, cpfCliente);
+
+    //         ResultSet resultSet = statement.executeQuery();
+
+    //         // Convertendo resultados para a classe interna Consulta
+    //         while (resultSet.next()) {
+    //             String nome = resultSet.getString("usuarios.nome");
+    //             Date data = new Date(resultSet.getTimestamp("consultas.data").getTime());
+    //             listaConsulta.add(nome);
+    //             listaConsulta.add(data.toString());
+    //         }
+
+    //         resultSet.close();
+    //         statement.close();
+    //         conn.close();
+    //     } catch (SQLException e) {
+    //         throw new RuntimeException(e);
+    //     }
+    //     return listaConsulta;
+    // }
+
+    public List<ConsultaResultado> ConsultaCliente(String cpfCliente) {
+
+        List<ConsultaResultado> listaConsulta = new ArrayList<>();
+        
+        String sql = "SELECT * from consultas INNER JOIN usuarios ON consultas.cpfProfissional = usuarios.cpf where consultas.cpfCliente = ?";
+
+        try {
+            // Conectando no banco e realizando consulta
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, cpfCliente);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            // Convertendo resultados para a classe interna Consulta
+            while (resultSet.next()) {
+                String nome = resultSet.getString("usuarios.nome");
+                Date data = new Date(resultSet.getTimestamp("consultas.data").getTime());
+                ConsultaResultado c = new ConsultaResultado(nome, data.toString());
+                listaConsulta.add(c);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaConsulta;
+    }
 
     public List<Consulta> getByCpfProfissional(String cpfProfissional) {
         List<Consulta> listaConsulta = new ArrayList<>();

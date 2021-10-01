@@ -23,15 +23,14 @@
 								<h1>
 									<fmt:message key="project" />
 								</h1>
-
 							</div>
 
-
 							<fieldset>
+								Currículo (em formato pdf):
 								<form action="/<%= contextPath%>/upload" method="post" enctype="multipart/form-data">
 									<input type="file" name="guru_file" size="50" />
 									<br />
-									<input type="submit" value="Upload" />
+									<input type="submit" value=<fmt:message key="register"/> />
 								</form>
 							</fieldset>
 

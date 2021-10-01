@@ -26,14 +26,11 @@
 			</h1>
 			
 		</div>
-		<!-- request.getSession().setAttribute("usuarioLogado", cliente);
-                        request.getSession().setAttribute("tipoUsuario", "cliente"); -->
+
 		<div class="extremos">
 			<h2>
-				<fmt:message key="welcome"/>
-				${usuarioLogado.nome}
+				<fmt:message key="titulo_agendar"/>
 			</h2>
-			<!-- <a class="btn" href="/<%= contextPath%>/cliente/home.jsp">Home</a>		 -->
 		</div>
 		
 		<form action="/<%= contextPath%>/consultas/insere" method="post">
@@ -43,10 +40,6 @@
 							<fmt:message key="profissional"/>:
 					</label>	
 					<br/>
-						
-						<p>
-							${Profissional.nome}, ${Profissional.especialidade}	
-						</p>
 						<input type="hidden" name="cpf" value="${Profissional.cpf}">  
 						<br/>
 						

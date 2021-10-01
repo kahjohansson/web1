@@ -4,8 +4,6 @@ import java.util.Date;
 public class Consulta{
     private String cpfCliente;
     private String cpfProfissional; 
-    
-    
     private Date data;
 
     public Consulta(String cpfCliente, String cpfProfissional, Date data) {
