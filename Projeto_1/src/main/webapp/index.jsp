@@ -25,7 +25,6 @@
 			<div class=btns>
 				<h2>
 					<fmt:message key="welcome"/>
-					${sessionScope.usuarioLogado.nome}
 				</h2>
 
 				<a href="login">

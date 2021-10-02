@@ -14,12 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
-// import br.ufscar.dc.dsw.EmailService;
 import br.ufscar.dc.dsw.POJO.Cliente;
 import br.ufscar.dc.dsw.POJO.Consulta;
 import br.ufscar.dc.dsw.POJO.ConsultaResultado;
 import br.ufscar.dc.dsw.POJO.Profissional;
-
 
 public class ConsultaDAO extends DAO {
 
@@ -298,27 +296,9 @@ public class ConsultaDAO extends DAO {
             statement.setString(2, consulta.getCpfProfissional());
             statement.setTimestamp(3, data);
             
-            // EmailService service = new EmailService();
-            
             Cliente cliente = daoCli.selectByCpf(consulta.getCpfCliente());
-
             Profissional profissional = daoPro.selectByCpf(consulta.getCpfProfissional());
     		
-
-    		// InternetAddress from = new InternetAddress("agendamentodonaderi@gmail.com", "Fulano");
-    		// Cliente toCliente = new InternetAddress(cliente.getEmail(), cliente.getNome());
-    		// Profissional toProfissional = new InternetAddress(profissional.getEmail(), profissional.getNome());
-    		
-    		String dataString = consulta.getData().toString();
-    		String subject = "Consulta Marcada!";
-    		String body = "Consulta marcada na data " + dataString + " " //PENSAR EM UMA FORMA DE RETORNAR ISSO
-    					+ "Cliente: " + cliente.getNome() + " "
-    					+ "Profissional: " + profissional.getNome();
-
-            
-    		// service.send(from, toCliente, subject, body);
-    		// service.send(from, toProfissional, subject, body);
-
             statement.executeUpdate();
             statement.close();
             conn.close();

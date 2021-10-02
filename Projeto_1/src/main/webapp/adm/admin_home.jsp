@@ -8,6 +8,7 @@
 <head>
     <title>Admin Home</title>
     <meta charset="UTF-8">
+	<link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet" type="text/css"/>
     <link href="styles.css" rel="stylesheet" type="text/css"/>
 </head>
 
@@ -29,7 +30,6 @@
 			<div class=btns>
 				<h2>
 					<fmt:message key="welcome"/>
-					${usuarioLogado.nome}
 				</h2>
 				<a href="/<%= contextPath%>/admin/cliente">
 					<div class="btn">

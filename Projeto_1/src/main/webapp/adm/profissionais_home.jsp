@@ -8,6 +8,7 @@
 <head>
     <title>Admin Home</title>
     <meta charset="UTF-8">
+	<link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet" type="text/css"/>
     <link href="styles.css" rel="stylesheet" type="text/css"/>
 </head>
 

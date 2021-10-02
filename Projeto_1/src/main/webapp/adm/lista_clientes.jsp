@@ -40,10 +40,10 @@
 					<td>${cliente.telefone}</td>
 					<td>${cliente.dataNascimento}</td>
 					<td>
-						<a href="/<%= contextPath%>/cliente/editar?cpf=${cliente.cpf}">
+						<a href="/<%= contextPath%>/admin/cliente/editar?cpf=${cliente.cpf}">
 						EDITAR
 						</a>
-						<a href="/<%= contextPath%>/cliente/remover?cpf=${cliente.cpf}">
+						<a href="/<%= contextPath%>/admin/cliente/remover?cpf=${cliente.cpf}">
 						REMOVER
 						</a>
 					</td>

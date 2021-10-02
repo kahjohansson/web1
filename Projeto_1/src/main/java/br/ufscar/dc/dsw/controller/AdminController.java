@@ -275,7 +275,7 @@ public class AdminController extends HttpServlet {
         String cpf = request.getParameter("cpf");
         Profissional profissional = daoProfissional.selectByCpf(cpf);
         daoProfissional.delete(profissional);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/admin_home.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/adm/sucesso.jsp");
         dispatcher.forward(request, response);
     }
 
