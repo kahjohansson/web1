@@ -47,7 +47,6 @@
 					<input type="submit" name="login_" value=<fmt:message key="login"/> />
 				</div>
 			</form>
-			<a href="/<%= contextPath%>/cliente/pagina_cadastro"><fmt:message key="createAccount"/></a>
 		</fieldset>
 
     </fmt:bundle>

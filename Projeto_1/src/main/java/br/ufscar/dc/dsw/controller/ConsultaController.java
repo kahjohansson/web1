@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.io.IOException;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -160,8 +161,10 @@ public class ConsultaController extends HttpServlet {
 
             if (!existe) {
                 dao.insert(consulta);
+                String URL = "/sucesso.jsp"; // jogar para página de lista consultas quando existir
+                RequestDispatcher rd = request.getRequestDispatcher(URL);
+                rd.forward(request, response);
             } else {
-
                 erros.add("O horário escolhido já está ocupado por você ou pelo profissional.");
                 request.setAttribute("mensagens", erros);
                 String URL = "/consultas/x";
@@ -180,10 +183,6 @@ public class ConsultaController extends HttpServlet {
             rd.forward(request, response);
             return;
         }
-
-        String URL = "/consultas/listar"; // jogar para página de lista consultas quando existir
-        RequestDispatcher rd = request.getRequestDispatcher(URL);
-        rd.forward(request, response);
 
     }
 
