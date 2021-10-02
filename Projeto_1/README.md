@@ -14,7 +14,7 @@ ___
 ```
 mysql -u root -p
 source db/MySql/create.sql;
-source db/MySql/create.sql;
+source db/MySql/populate.sql;
 ```
 
 ### Compilação e deploy
