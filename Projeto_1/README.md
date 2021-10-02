@@ -21,7 +21,7 @@ source db/MySql/create.sql;
 
 ```
 mvn compile
-mvn Tomcat9:deploy
+mvn tomcat7:deploy
 ```
 ___
 ## Requisitos cumpridos
