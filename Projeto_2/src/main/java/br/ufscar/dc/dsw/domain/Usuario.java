@@ -34,6 +34,10 @@ public abstract class Usuario{
         this.email = email;
         this.senha = senha;
     }
+
+    public Usuario() {
+        
+    }
     
     public String getCpf() {
         return cpf;

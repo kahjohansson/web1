@@ -10,7 +10,7 @@ import br.ufscar.dc.dsw.domain.Cliente;
 @SuppressWarnings("unchecked")
 public interface ClienteDAO extends CrudRepository<Cliente, String>{
 
-	Cliente findByCPF(String cpf);
+	Cliente findByCpf(String cpf);
 
 	List<Cliente> findAll();
 	

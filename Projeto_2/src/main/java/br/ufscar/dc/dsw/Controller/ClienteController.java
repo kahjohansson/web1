@@ -31,7 +31,7 @@ public class ClienteController {
 	public String listar(ModelMap model) {
 		
 		model.addAttribute("clientes", clienteService.buscarTodos());
-		return "clientes/lista";
+		return "lista";
 	}
 
 }

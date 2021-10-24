@@ -12,6 +12,10 @@ import br.ufscar.dc.dsw.domain.Usuario;
 @Table(name = "clientes")
 public class Cliente extends Usuario {
 
+	public Cliente() {
+		super();
+	}
+
 	public Cliente(String cpf, String nome, String email, String senha, String telefone, String sexo, String dataNascimento) {
 		super(cpf, nome, email, senha);
 		this.telefone = telefone;

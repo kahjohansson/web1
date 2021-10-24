@@ -27,7 +27,7 @@ public class ClienteService implements IClienteService {
 
 	@Transactional(readOnly = true)
 	public Cliente buscarPorCpf(String cpf) {
-		return dao.findByCPF(cpf);
+		return dao.findByCpf(cpf);
 	}
 
 	@Transactional(readOnly = true)
