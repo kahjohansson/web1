@@ -1,6 +1,15 @@
-package br.ufscar.dc.dsw.POJO;
+package br.ufscar.dc.dsw.domain;
 
+import java.util.Set;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import br.ufscar.dc.dsw.domain.Usuario;
 
+@Entity
+@Table(name = "clientes")
 public class Cliente extends Usuario {
 
 	public Cliente(String cpf, String nome, String email, String senha, String telefone, String sexo, String dataNascimento) {

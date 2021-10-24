@@ -1,4 +1,4 @@
-package br.ufscar.dc.dsw.POJO;
+package br.ufscar.dc.dsw.domain;
 import java.util.Date;
 
 public class Consulta{
