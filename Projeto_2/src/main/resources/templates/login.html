@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+	<div class="nav">
+		<h1>
+			Sistema de Agendamento
+		</h1>
+	</div>
+
+	<fieldset id="login">
+		<p>
+			<fmt:message key="cliente" />
+		</p>
+		<form name="l" action="/login" method="POST">
+			<div>
+				<div>
+					<p>
+						Usuário
+					</p> <input type="text" name="email" />
+					<p>
+						Senha
+					</p> <input type="password" name="senha" />
+				</div>
+				<input type="submit" name="login_" value=Login />
+			</div>
+		</form>
+	</fieldset>
+</body>
+
+</html>
