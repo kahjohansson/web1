@@ -19,20 +19,24 @@ public abstract class Usuario{
     @Id
     private String cpf;
 
-    @Column(nullable = false, unique = true, length = 60)
+    @Column(nullable = false, unique = true, length = 256)
 	private String nome;
 
-    @Column(nullable = false, unique = true, length = 60)
+    @Column(nullable = false, unique = true, length = 256)
 	private String email;
 
-    @Column(nullable = false, unique = false, length = 60)
+    @Column(nullable = false, unique = false, length = 256)
 	private String senha;
 
-    public Usuario(String cpf, String nome, String email, String senha) {
+    @Column(nullable = false, unique = false, length = 64)
+	private String papel;
+
+    public Usuario(String cpf, String nome, String email, String senha, String papel) {
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.papel = papel;
     }
 
     public Usuario() {
@@ -62,6 +66,14 @@ public abstract class Usuario{
     }
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getPapel() {
+        return papel;
+    }
+
+    public void setPapel(String papel) {
+        this.papel = papel;
     }
 
 }

@@ -16,15 +16,20 @@ public class Cliente extends Usuario {
 		super();
 	}
 
-	public Cliente(String cpf, String nome, String email, String senha, String telefone, String sexo, String dataNascimento) {
-		super(cpf, nome, email, senha);
+	public Cliente(String cpf, String nome, String email, String senha, String papel, String telefone, String sexo, String dataNascimento) {
+		super(cpf, nome, email, senha, papel);
 		this.telefone = telefone;
 		this.sexo = sexo;
 		this.dataNascimento = dataNascimento;
 	}
 
+	@Column(nullable = false, unique = true, length = 13)
 	private String telefone;
+
+	@Column(nullable = false, unique = true, length = 32)
 	private String sexo;
+
+	@Column(nullable = false, unique = true)
 	private String dataNascimento;
 
 	public String getSexo() {
