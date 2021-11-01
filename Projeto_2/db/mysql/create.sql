@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
   nome VARCHAR(256) NOT NULL,
   email VARCHAR(256) NOT NULL,
   senha VARCHAR(256) NOT NULL,
+  papel VARCHAR(64) NOT NULL,
   PRIMARY KEY (cpf));
 
 
