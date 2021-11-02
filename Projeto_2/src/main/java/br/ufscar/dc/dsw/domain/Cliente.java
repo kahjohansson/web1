@@ -29,7 +29,7 @@ public class Cliente extends Usuario {
 	@Column(nullable = false, unique = true, length = 32)
 	private String sexo;
 
-	@Column(nullable = false, unique = true)
+	@Column(name="data_nascimento", nullable = false, unique = true)
 	private String dataNascimento;
 
 	public String getSexo() {
