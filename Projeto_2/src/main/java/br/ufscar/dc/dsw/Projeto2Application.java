@@ -21,23 +21,23 @@ public class Projeto2Application {
 
 	}
 
-	@Bean
-	public CommandLineRunner demo(ClienteDAO clienteDAO) {
-		return (args) -> {
+	// @Bean
+	// public CommandLineRunner demo(ClienteDAO clienteDAO) {
+	// 	return (args) -> {
 
-		// testando o DAO de cliente
-		String cpf = "89999999999";
-		String nome = "teste";
-		String email = "testando@gmail.com";
-		String senha = "senha";
-		String papel = "cliente";
-		String telefone = "11912345678";
-		String sexo = "feminino";
-		String dataNascimento = "1999-01-01";
-		Cliente cliente = new Cliente(cpf, nome, email, senha, papel, telefone, sexo, dataNascimento);
-		clienteDAO.save(cliente);
+	// 	// testando o DAO de cliente
+	// 	String cpf = "89999999999";
+	// 	String nome = "teste";
+	// 	String email = "testando@gmail.com";
+	// 	String senha = "senha";
+	// 	String papel = "cliente";
+	// 	String telefone = "11912345678";
+	// 	String sexo = "feminino";
+	// 	String dataNascimento = "1999-01-01";
+	// 	Cliente cliente = new Cliente(cpf, nome, email, senha, papel, telefone, sexo, dataNascimento);
+	// 	clienteDAO.save(cliente);
 		
-		};
-	}
+	// 	};
+	// }
 
 }

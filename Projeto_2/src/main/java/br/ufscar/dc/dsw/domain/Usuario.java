@@ -1,6 +1,6 @@
 package br.ufscar.dc.dsw.domain;
 
-// package br.ufscar.dc.dsw.domain;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "usuarios")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Usuario{
+public class Usuario{
 
     @Id
     private String cpf;
