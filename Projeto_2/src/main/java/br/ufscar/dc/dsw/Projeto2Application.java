@@ -22,23 +22,23 @@ public class Projeto2Application {
 
 	}
 
-	@Bean
-	public CommandLineRunner demo(ClienteDAO clienteDAO, BCryptPasswordEncoder encoder) {
-		return (args) -> {
+	// @Bean
+	// public CommandLineRunner demo(ClienteDAO clienteDAO, BCryptPasswordEncoder encoder) {
+	// 	return (args) -> {
 
-		// testando o DAO de cliente
-		String cpf = "19999999999";
-		String nome = "Teste Teste";
-		String email = "teste@email.com";
-		String senha = encoder.encode("senha");
-		String papel = "cliente";
-		String telefone = "11912345678";
-		String sexo = "feminino";
-		String dataNascimento = "1999-01-01";
-		Cliente cliente = new Cliente(cpf, nome, email, senha, papel, telefone, sexo, dataNascimento);
-		clienteDAO.save(cliente);
+	// 	// testando o DAO de cliente
+	// 	String cpf = "00000000";
+	// 	String nome = "Teste132";
+	// 	String email = "teste_senha@email.com";
+	// 	String senha = encoder.encode("1234");
+	// 	String papel = "cliente";
+	// 	String telefone = "11912345678";
+	// 	String sexo = "feminino";
+	// 	String dataNascimento = "1999-01-01";
+	// 	Cliente cliente = new Cliente(cpf, nome, email, senha, papel, telefone, sexo, dataNascimento);
+	// 	clienteDAO.save(cliente);
 		
-		};
-	}
+	// 	};
+	// }
 
 }

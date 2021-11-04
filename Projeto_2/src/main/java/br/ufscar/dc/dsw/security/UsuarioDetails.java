@@ -7,12 +7,13 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
  
 @SuppressWarnings("serial")
 public class UsuarioDetails implements UserDetails {
-
+    BCryptPasswordEncoder encoder;
+    
     
     private Usuario usuario;
      

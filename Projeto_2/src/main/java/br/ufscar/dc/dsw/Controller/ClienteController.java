@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,10 @@ public class ClienteController {
 	@Autowired
 	private IClienteService clienteService;
 
+	@GetMapping("/cadastrar")
+	public String cadastrar(Cliente cliente) {
+		return "cadastro";
+	}
 
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
@@ -34,4 +39,19 @@ public class ClienteController {
 		return "admin/lista";
 	}
 
+	@PostMapping("/salvar")
+	public String salvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr, BCryptPasswordEncoder encoder) {
+		if (cliente.getPapel() == null) {
+			cliente.setPapel("cliente");
+		}
+
+		if (result.hasErrors()) {
+			return "admin/cadastro";
+		}
+		
+		cliente.setSenha(encoder.encode(cliente.getSenha()));
+		clienteService.salvar(cliente);
+		attr.addFlashAttribute("sucess", "Cliente inserido com sucesso");
+		return "redirect:/index";
+	}
 }
