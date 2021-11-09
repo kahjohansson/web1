@@ -29,7 +29,7 @@ public class ClienteController {
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(Cliente cliente) {
-		return "cadastro";
+		return "cliente/cadastro";
 	}
 
 	@GetMapping("/listar")

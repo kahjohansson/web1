@@ -12,9 +12,8 @@
 
 <body>	
 		
-	<fieldset>
-		<form th:action="${/clientes/salvar}"
-		th:object="${cliente}" method="POST">					
+	
+		<form th:action="@{/clientes/salvar}" th:object="${cliente}" method="POST">					
 					
 					<label for="cpf">CPF</label><br>
 					<input
@@ -57,14 +56,14 @@
 					</select>
 					<br>
 					
-					<label for="dataNasc">Data de Nascimento</label> 
-					<input type="date" class="form-control" id="dataNasc" placeholder="dd/mm/yyyy"
-						autofocus="autofocus" th:field="*{dataNasc}"
+					<label for="dataNascimento">Data de Nascimento</label> 
+					<input type="date" class="form-control" id="dataNascimento" placeholder="dd/mm/yyyy"
+						autofocus="autofocus" th:field="*{dataNascimento}"
 					/> <br>
 
 				<button type="submit">Salvar</button>			
 		</form>
-	</fieldset>
+	
 </body>
 
 </html>
