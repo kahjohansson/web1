@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
 	layout:decorate="~{layout}">
 
 <head>
@@ -25,16 +24,20 @@
 				<h2>
 					Bem vindo
 				</h2>
-
-				<a th:href="@{/login}">
+				
+				<a th:href="@{admin/lista}">
 					<div class="btn">
-						Login
+						Lista de Clientes
 					</div>
 				</a>
 
-				<!-- <div sec:authorize="hasRole('admin')"> -->
-					<p><a th:href="@{/admin}">Admin Home</a></p>
-				<!-- </div> -->
+				<a th:href="@{clientes/cadastrar}">
+					<div class="btn">
+						Cadastro Cliente
+					</div>
+				</a>
+
+		
 			</div>
 		</div>
 

@@ -36,7 +36,7 @@ public class ClienteController {
 	public String listar(ModelMap model) {
 		
 		model.addAttribute("clientes", clienteService.buscarTodos());
-		return "admin/lista";
+		return "cliente/lista";
 	}
 
 	@PostMapping("/salvar")
