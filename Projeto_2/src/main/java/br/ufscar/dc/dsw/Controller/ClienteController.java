@@ -54,4 +54,35 @@ public class ClienteController {
 		attr.addFlashAttribute("sucess", "Cliente inserido com sucesso");
 		return "redirect:/index";
 	}
+
+	@GetMapping("/editar/{cpf}")
+	public String preEditar(@PathVariable("cpf") String cpf, ModelMap model) {
+		model.addAttribute("cliente", clienteService.buscarPorCpf(cpf));
+		return "cliente/edicao";
+	}
+
+	@PostMapping("/editar")
+	public String editar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr) {
+		if (cliente.getPapel() == null) {
+			cliente.setPapel("cliente");
+		}
+		if (result.hasErrors()) {
+			return "cliente/cadastro";
+		}
+		clienteService.salvar(cliente);
+		attr.addFlashAttribute("sucess", "Cliente editado com sucesso.");
+		return "redirect:/clientes/listar";
+	}
+
+	@GetMapping("/excluir/{cpf}")
+	public String excluir(@PathVariable("cpf") String cpf, RedirectAttributes attr) {
+		// if (clienteService.clienteTemConsulta(id)) {
+		// 	attr.addFlashAttribute("fail", "Cliente não excluído. Possui consultas agendadas.");
+		// }
+		// else {
+		clienteService.excluir(cpf);
+		attr.addFlashAttribute("sucess", "Cliente excluído com sucesso.");
+		// }
+		return "redirect:/clientes/listar";
+	}
 }

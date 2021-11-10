@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+	layout:decorate="~{layout}">
+
+
+<head>
+    <title>Cadastro Cliente</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+		<form th:action="@{/clientes/editar}" th:object="${cliente}" method="POST">	
+	
+					<fieldset>
+						<legend> EDICAO DE CLIENTES </legend>
+						
+						CPF <br/>
+						<input type="text" name="cpf" th:value="${cliente.cpf}" readonly/> <br/>
+						
+						NOME <br/>
+						<input type="text" name="nome" th:value="${cliente.nome}"/> <br/>
+						
+						EMAIL <br/>
+						<input type="email" name="email" th:value="${cliente.email}"/> <br/>
+						
+						SENHA <br/>
+						<input type="text" name="senha" th:value="${cliente.senha}"/> <br/>
+						
+						SEXO <br/>
+						<input type="text" name="sexo" th:value="${cliente.sexo}"/> <br/>
+						
+						TELEFONE <br/>
+						<input type="text" name="telefone" th:value="${cliente.telefone}"/> <br/>
+						
+						DATA DE NASC <br/>
+						<input type="date" name="dataNascimento" th:value="${cliente.dataNascimento}"/> <br/>
+
+						<input type="submit" name="enviar" value="atualizar" />
+					</fieldset>
+			</form>
+		
+</body>
+
+</html>

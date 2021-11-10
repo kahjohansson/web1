@@ -13,30 +13,25 @@
 
 <body>
 
-		<div class="nav">
-			<h1>
-				<span th:text="#{index.header}">		
-			</h1>
+		<h1>
+			<span th:text="#{index.header}">		
+		</h1>
 			
-		</div>		
-		
-		<div class="btns-sup">
-			<div class=btns>
-				<h2>
-					Bem vindo
-				</h2>
+		<h2>
+			Bem vindo
+		</h2>
 
-				<a th:href="@{/login}">
-					<div class="btn">
-						Login
-					</div>
-				</a>
-
-				<!-- <div sec:authorize="hasRole('admin')"> -->
-					<p><a th:href="@{/admin}">Admin Home</a></p>
-				<!-- </div> -->
+		<a th:href="@{/login}">
+			<div class="btn">
+				Login
 			</div>
-		</div>
+		</a>
+
+		<!-- <div sec:authorize="hasRole('admin')"> -->
+			<p><a th:href="@{/admin}">Admin Home</a></p>
+		<!-- </div> -->
+	
+		
 
 </body>
 
