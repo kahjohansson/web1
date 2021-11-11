@@ -39,50 +39,50 @@ public class ProfissionalController {
 		return "lista_profissional";
 	}
 
-	// @PostMapping("/salvar")
-	// public String salvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr, BCryptPasswordEncoder encoder) {
-	// 	if (cliente.getPapel() == null) {
-	// 		cliente.setPapel("cliente");
-	// 	}
+	@PostMapping("/salvar")
+	public String salvar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr, BCryptPasswordEncoder encoder) {
+		if (profissional.getPapel() == null) {
+			profissional.setPapel("profissional");
+		}
 
-	// 	if (result.hasErrors()) {
-	// 		return "admin/cadastro";
-	// 	}
+		if (result.hasErrors()) {
+			return "/";
+		}
 		
-	// 	cliente.setSenha(encoder.encode(cliente.getSenha()));
-	// 	clienteService.salvar(cliente);
-	// 	attr.addFlashAttribute("sucess", "Cliente inserido com sucesso");
-	// 	return "redirect:/index";
-	// }
+		profissional.setSenha(encoder.encode(profissional.getSenha()));
+		profissionalService.salvar(profissional);
+		attr.addFlashAttribute("sucess", "Profissional inserido com sucesso");
+		return "redirect:/admin";
+	}
 
-	// @GetMapping("/editar/{cpf}")
-	// public String preEditar(@PathVariable("cpf") String cpf, ModelMap model) {
-	// 	model.addAttribute("cliente", clienteService.buscarPorCpf(cpf));
-	// 	return "cliente/edicao";
-	// }
+	@GetMapping("/editar/{cpf}")
+	public String preEditar(@PathVariable("cpf") String cpf, ModelMap model) {
+		model.addAttribute("profissional", profissionalService.buscarPorCpf(cpf));
+		return "profissional/edicao";
+	}
 
-	// @PostMapping("/editar")
-	// public String editar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr) {
-	// 	if (cliente.getPapel() == null) {
-	// 		cliente.setPapel("cliente");
-	// 	}
-	// 	if (result.hasErrors()) {
-	// 		return "cliente/cadastro";
-	// 	}
-	// 	clienteService.salvar(cliente);
-	// 	attr.addFlashAttribute("sucess", "Cliente editado com sucesso.");
-	// 	return "redirect:/clientes/listar";
-	// }
+	@PostMapping("/editar")
+	public String editar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr) {
+		if (profissional.getPapel() == null) {
+			profissional.setPapel("profissional");
+		}
+		if (result.hasErrors()) {
+			return "profissional/cadastro";
+		}
+		profissionalService.salvar(profissional);
+		attr.addFlashAttribute("sucess", "Profissional editado com sucesso.");
+		return "redirect:/profissionais/listar";
+	}
 
-	// @GetMapping("/excluir/{cpf}")
-	// public String excluir(@PathVariable("cpf") String cpf, RedirectAttributes attr) {
-	// 	// if (clienteService.clienteTemConsulta(id)) {
-	// 	// 	attr.addFlashAttribute("fail", "Cliente não excluído. Possui consultas agendadas.");
-	// 	// }
-	// 	// else {
-	// 	clienteService.excluir(cpf);
-	// 	attr.addFlashAttribute("sucess", "Cliente excluído com sucesso.");
-	// 	// }
-	// 	return "redirect:/clientes/listar";
-	// }
+	@GetMapping("/excluir/{cpf}")
+	public String excluir(@PathVariable("cpf") String cpf, RedirectAttributes attr) {
+		// if (clienteService.clienteTemConsulta(id)) {
+		// 	attr.addFlashAttribute("fail", "Cliente não excluído. Possui consultas agendadas.");
+		// }
+		// else {
+		profissionalService.excluir(cpf);
+		attr.addFlashAttribute("sucess", "Profissional excluído com sucesso.");
+		// }
+		return "redirect:/profissionais/listar";
+	}
 }

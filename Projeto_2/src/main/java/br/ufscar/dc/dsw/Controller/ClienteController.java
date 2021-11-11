@@ -46,13 +46,13 @@ public class ClienteController {
 		}
 
 		if (result.hasErrors()) {
-			return "admin/cadastro";
+			return "/";
 		}
 		
 		cliente.setSenha(encoder.encode(cliente.getSenha()));
 		clienteService.salvar(cliente);
 		attr.addFlashAttribute("sucess", "Cliente inserido com sucesso");
-		return "redirect:/index";
+		return "redirect:/admin";
 	}
 
 	@GetMapping("/editar/{cpf}")
