@@ -7,6 +7,8 @@ import br.ufscar.dc.dsw.domain.Profissional;
 public interface IProfissionalService {
 
 	Profissional buscarPorCpf(String cpf);
+
+	Profissional buscarPorEmail(String email);
 	
 	List<Profissional> buscarTodos();
 	
