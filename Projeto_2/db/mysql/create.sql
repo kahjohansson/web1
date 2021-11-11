@@ -49,7 +49,8 @@ CREATE TABLE IF NOT EXISTS profissionais (
 CREATE TABLE IF NOT EXISTS consultas(
 	cpfCliente varchar(11) NOT NULL,
 	cpfProfissional varchar(14) NOT NULL,
-	data datetime NOT NULL,
+	data DATE NOT NULL,
+  horario INT NOT NULL,
     
 	CONSTRAINT fk_cpf_cliente
   FOREIGN KEY (cpfCliente) 
