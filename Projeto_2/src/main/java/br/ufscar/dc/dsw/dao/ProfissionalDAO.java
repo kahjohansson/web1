@@ -11,6 +11,8 @@ public interface ProfissionalDAO extends CrudRepository<Profissional, String>{
 
 	Profissional findByCpf(String cpf);
 
+	Profissional findByEmail(String email);
+
 	List<Profissional> findAll();
 	
 	Profissional save(Profissional Profissional);

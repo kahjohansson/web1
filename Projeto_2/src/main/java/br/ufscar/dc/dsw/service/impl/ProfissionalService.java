@@ -31,6 +31,11 @@ public class ProfissionalService implements IProfissionalService {
 	}
 
 	@Transactional(readOnly = true)
+	public Profissional buscarPorEmail(String email) {
+		return dao.findByEmail(email);
+	}
+
+	@Transactional(readOnly = true)
 	public List<Profissional> buscarTodos() {
 		return dao.findAll();
 	}

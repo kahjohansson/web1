@@ -16,4 +16,6 @@ public interface ClienteDAO extends CrudRepository<Cliente, String>{
 	Cliente save(Cliente cliente);
 
 	void deleteById(String cpf);
+
+	Cliente findByEmail(String email);
 }
