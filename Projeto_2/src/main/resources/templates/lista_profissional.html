@@ -13,30 +13,20 @@
 		<thead>
 			<tr>
 				<th th:text="#{name.label}"></th>
-				<th>Email</th>
-				<th th:text="#{acao.label}"></th>
+				<th>Especialidade</th>
+				<th>Área</th>
+				<!-- <th th:text="#{acao.label}"></th> -->
 				<!-- <div sec:authorize="hasAuthority('Adm')">
 					<th th:text="#{acao.label}"></th>
 				</div> -->
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="cliente : ${clientes}">
-				<td th:text="${cliente.nome}"></td>
-				<td th:text="${cliente.email}"></td>
-				
-
-				<td>
-					<a th:href="@{/clientes/editar/{cpf} (cpf=${cliente.cpf}) }"
-					role="button"> 
-					<span th:text="#{editar.label}"></span>
-					</a>
-					<a th:href="@{/clientes/excluir/{cpf} (cpf=${cliente.cpf}) }"
-					role="button"> 
-					<span th:text="#{excluir.label}"></span>
-
-				</td>
-			
+			<tr th:each="profissional : ${profissionais}">
+				<td th:text="${profissional.nome}"></td>
+				<td th:text="${profissional.especialidade}"></td>
+				<td th:text="${profissional.area}"></td>
+				<td> <a href="/agendar">Agendar</a></td>
 			</tr>
 		</tbody>
 	</table>

@@ -18,6 +18,10 @@ public class Profissional extends Usuario {
     @Column(nullable = false, unique = true, length = 512)
     private String curriculo;
     
+    public Profissional() {
+		super();
+	}
+
     public Profissional(String cpf, String nome, String email, String senha, String papel, String area, String especialidade,
             String curriculo) {
         super(cpf, nome, email, senha, papel);
