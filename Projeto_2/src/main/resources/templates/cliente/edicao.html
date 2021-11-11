@@ -15,27 +15,27 @@
 		<form th:action="@{/clientes/editar}" th:object="${cliente}" method="POST">	
 	
 					<fieldset>
-						<legend> EDICAO DE CLIENTES </legend>
+						<legend> <th th:text="#{edit_cli.label}"></th></legend>
 						
 						CPF <br/>
 						<input type="text" name="cpf" th:value="${cliente.cpf}" readonly/> <br/>
 						
-						NOME <br/>
+						<th th:text="#{name.label}"></th> <br/>
 						<input type="text" name="nome" th:value="${cliente.nome}"/> <br/>
 						
-						EMAIL <br/>
+						Email <br/>
 						<input type="email" name="email" th:value="${cliente.email}"/> <br/>
 						
-						SENHA <br/>
+						<th th:text="#{senha.label}"></th> <br/>
 						<input type="text" name="senha" th:value="${cliente.senha}"/> <br/>
 						
-						SEXO <br/>
+						<th th:text="#{sex.label}"></th> <br/>
 						<input type="text" name="sexo" th:value="${cliente.sexo}"/> <br/>
 						
-						TELEFONE <br/>
+						<th th:text="#{telefone.label}"></th> <br/>
 						<input type="text" name="telefone" th:value="${cliente.telefone}"/> <br/>
 						
-						DATA DE NASC <br/>
+						<th th:text="#{dataNasc.label}"></th> <br/>
 						<input type="date" name="dataNascimento" th:value="${cliente.dataNascimento}"/> <br/>
 
 						<input type="submit" name="enviar" value="atualizar" />

@@ -39,6 +39,13 @@ public class ProfissionalController {
 		return "lista_profissional";
 	}
 
+	@GetMapping("/listar_adm")
+	public String listar_adm(ModelMap model) {
+		
+		model.addAttribute("profissionais", profissionalService.buscarTodos());
+		return "profissional/lista";
+	}
+
 	@PostMapping("/salvar")
 	public String salvar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr, BCryptPasswordEncoder encoder) {
 		if (profissional.getPapel() == null) {
@@ -71,7 +78,7 @@ public class ProfissionalController {
 		}
 		profissionalService.salvar(profissional);
 		attr.addFlashAttribute("sucess", "Profissional editado com sucesso.");
-		return "redirect:/profissionais/listar";
+		return "redirect:/profissionais/listar_adm";
 	}
 
 	@GetMapping("/excluir/{cpf}")
@@ -83,6 +90,6 @@ public class ProfissionalController {
 		profissionalService.excluir(cpf);
 		attr.addFlashAttribute("sucess", "Profissional excluído com sucesso.");
 		// }
-		return "redirect:/profissionais/listar";
+		return "redirect:/profissionais/listar_adm";
 	}
 }
