@@ -1,36 +1,65 @@
 package br.ufscar.dc.dsw.domain;
+
 import java.util.Date;
+import java.sql.Timestamp;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name = "consultas")
 public class Consulta{
-    private String cpfCliente;
-    private String cpfProfissional; 
-    private Date data;
 
-    public Consulta(String cpfCliente, String cpfProfissional, Date data) {
-        this.cpfCliente = cpfCliente;
-        this.cpfProfissional = cpfProfissional;
-        this.data = data;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    public void setCpfCliente(String cpfCliente) { 
-        this.cpfCliente = cpfCliente; 
-    }
-    public String getCpfCliente() { 
-        return this.cpfCliente; 
-    }
+    @ManyToOne
+    @JoinColumn(name = "cpfCliente")
+    // private String cpfCliente;
+    private Cliente cliente;
 
-    public void setCpfProfissional(String cpfProfissional) { 
-        this.cpfProfissional = cpfProfissional; 
-    }
-    public String getCpfProfissional() { 
-        return this.cpfProfissional; 
-    }
+    @ManyToOne
+    @JoinColumn(name = "cpfProfissional")
+    // private String cpfProfissional;
+    private Profissional profissional;
 
-    public void setData(Date data) { 
+    // @Temporal(TemporalType.TIMESTAMP)
+    private String data;
+
+    private int horario;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    public Profissional getProfissional() {
+        return profissional;
+    }
+    public void setProfissional(Profissional profissional) {
+        this.profissional = profissional;
+    }
+    public void setData(String data) { 
         this.data = data; 
     }
-    public Date getData() { 
+    public String getData() { 
         return this.data; 
+    }
+
+    public int getHorario() {
+        return horario;
+    }
+    public void setHorario(int horario) {
+        this.horario = horario;
     }
 
 }
