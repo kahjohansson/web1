@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -16,15 +17,19 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario{
 
+    @NotBlank
     @Id
     private String cpf;
 
+    @NotBlank (message = "{NotBlank.usuario.name}")
     @Column(nullable = false, unique = true, length = 256)
 	private String nome;
 
+    @NotBlank(message = "{NotBlank.usuario.email}")
     @Column(nullable = false, unique = true, length = 256)
 	private String email;
 
+    @NotBlank (message = "{NotBlank.usuario.password}")
     @Column(nullable = false, unique = false, length = 256)
 	private String senha;
 

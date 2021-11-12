@@ -3,18 +3,26 @@ package br.ufscar.dc.dsw.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "profissionais")
 public class Profissional extends Usuario {
     
+
+    @NotBlank (message = "{NotBlank.area.curriculo}")
+	@Size(min = 3, max = 60)
     @Column(nullable = false, unique = true, length = 256)
     private String area;
 
+    @NotBlank (message = "{NotBlank.profissional.especialidade}")
+	@Size(min = 3, max = 60)
     @Column(nullable = false, unique = true, length = 256)
     private String especialidade;
 
+    @NotBlank (message = "{NotBlank.profissional.curriculo}")
+	@Size(min = 3, max = 60)
     @Column(nullable = false, unique = true, length = 512)
     private String curriculo;
     

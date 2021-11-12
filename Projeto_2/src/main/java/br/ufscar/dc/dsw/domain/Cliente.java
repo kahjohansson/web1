@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import br.ufscar.dc.dsw.domain.Usuario;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "clientes")
@@ -23,12 +25,18 @@ public class Cliente extends Usuario {
 		this.dataNascimento = dataNascimento;
 	}
 
+	@NotBlank
+	@Size(min = 1, max = 15)
 	@Column(nullable = false, unique = true, length = 13)
 	private String telefone;
 
+	@NotBlank
+	@Size(min = 1, max = 60)
 	@Column(nullable = false, unique = true, length = 32)
 	private String sexo;
 
+	@NotBlank
+	@Size(min = 1, max = 15)
 	@Column(name="data_nascimento", nullable = false, unique = true)
 	private String dataNascimento;
 
