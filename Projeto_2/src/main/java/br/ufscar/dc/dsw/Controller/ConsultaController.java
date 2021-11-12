@@ -107,7 +107,7 @@ public class ConsultaController {
 	}
 
     @GetMapping("/listar")
-	public String listar(@RequestParam(required = false) String c, ModelMap model) {
+	public String listar(ModelMap model) {
 		Usuario usuario = getUsuarioAutenticado();
 
 		List<Consulta> consultas;
@@ -120,6 +120,8 @@ public class ConsultaController {
 		}
 		
 		model.addAttribute("consultas", consultas);
+		model.addAttribute("consultas_len", consultas.size());
+		model.addAttribute("papel", usuario.getPapel());
 		return "consulta/lista";
 	}
     
