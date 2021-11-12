@@ -21,31 +21,30 @@
 		
 		<div class="btns-sup">
 			<div class=btns>
-				<h2>
-					Bem vindo
+				<h2 th:text="#{welcome.label}">	
 				</h2>
 				
 				<a th:href="@{clientes/listar}">
 					<div class="btn">
-						Lista de Clientes
+						<span th:text="#{cliente_lista.label}">
 					</div>
 				</a>
 
 				<a th:href="@{clientes/cadastrar}">
 					<div class="btn">
-						Cadastro Cliente
+						<span th:text="#{cliente_cadastro.label}">
 					</div>
 				</a>
 
 				<a th:href="@{profissionais/listar_adm}">
 					<div class="btn">
-						Lista de Profissionais
+						<span th:text="#{profissionais.lista.button.label}">
 					</div>
 				</a>
 				
 				<a th:href="@{profissionais/cadastrar}">
 					<div class="btn">
-						Cadastro Profissional
+						<span th:text="#{profissionais_cadastro.label}">
 					</div>
 				</a>
 
