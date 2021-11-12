@@ -17,10 +17,6 @@
 				<th th:text="#{name.label}"></th>
 				<th th:text="#{especialidade.label}"></th>
 				<th th:text="#{area.label}"></th>
-				<!-- <th th:text="#{acao.label}"></th> -->
-				<!-- <div sec:authorize="hasAuthority('Adm')">
-					<th th:text="#{acao.label}"></th>
-				</div> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -28,10 +24,12 @@
 				<td th:text="${profissional.nome}"></td>
 				<td th:text="${profissional.especialidade}"></td>
 				<td th:text="${profissional.area}"></td>
+				<div sec:authorize="hasAuthority('cliente')">
 				<td> <a th:href="@{/consultas/agendar/{cpf} (cpf=${profissional.cpf}) }"
 					role="button"> 
 					<span th:text="#{consulta.agendar.label}"></span>
 					</a></td>
+				</div>
 			</tr>
 		</tbody>
 	</table>
