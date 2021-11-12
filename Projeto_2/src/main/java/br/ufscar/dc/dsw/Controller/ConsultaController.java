@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Consulta;
 import br.ufscar.dc.dsw.domain.Profissional;
+import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.impl.ClienteService;
 import br.ufscar.dc.dsw.service.impl.ConsultaService;
@@ -38,6 +39,12 @@ public class ConsultaController {
     @Autowired
 	private ProfissionalService profissionalService;
 
+	private Usuario getUsuarioAutenticado() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UsuarioDetails user = (UsuarioDetails)authentication.getPrincipal();
+		return user.getUsuario();
+	}
+
     private Cliente getClienteAutenticado() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UsuarioDetails user = (UsuarioDetails)authentication.getPrincipal();
@@ -50,18 +57,41 @@ public class ConsultaController {
 		return profissionalService.buscarPorEmail(user.getUsername());
 	}
 
-	@GetMapping("/cadastrar")
-	public String cadastrar(Consulta consulta, ModelMap model) {
-		model.addAttribute("profissionais", profissionalService.buscarTodos());
-		return "consulta/cadastro";
+	@GetMapping("/agendar/{cpf_profissional}")
+	public String preEditar(@PathVariable("cpf_profissional") String cpf_profissional, ModelMap model) {
+		// model.addAttribute("cpfCliente", getClienteAutenticado().getCpf());
+		model.addAttribute("cpfProfissional", cpf_profissional);
+		Consulta consulta = new Consulta();
+		consulta.setCpfCliente(getClienteAutenticado().getCpf());
+		consulta.setCpfProfissional(cpf_profissional);
+		model.addAttribute("consulta", consulta);
+		return "consulta/agendamento";
+	}
+
+	@PostMapping("/salvar")
+	public String salvar(@Valid Consulta consulta, BindingResult result, RedirectAttributes attr) {
+		if (result.hasErrors()) {
+			return "/";
+		}
+
+		// consulta.setCpfCliente(getClienteAutenticado().getCpf());
+		
+		consultaService.salvar(consulta);
+		attr.addFlashAttribute("sucess", "Consulta agendada com sucesso");
+		return "redirect:/";
 	}
 
     @GetMapping("/listar")
 	public String listar(@RequestParam(required = false) String c, ModelMap model) {
-		List<Consulta> consultas = consultaService.buscarPorCliente(getClienteAutenticado());
-		
-		if(consultas.isEmpty()) {
-			consultas = consultaService.buscarPorProfissional(getProfissionalAutenticado());
+		Usuario usuario = getUsuarioAutenticado();
+
+		List<Consulta> consultas;
+
+		if (usuario.getPapel() == "cliente"){
+			consultas = consultaService.buscarPorCpfCliente(getClienteAutenticado().getCpf());
+		}
+		else {
+			consultas = consultaService.buscarPorCpfProfissional(getProfissionalAutenticado().getCpf());
 		}
 		
 		model.addAttribute("consultas", consultas);

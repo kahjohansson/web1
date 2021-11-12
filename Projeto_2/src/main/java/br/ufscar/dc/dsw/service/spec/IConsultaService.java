@@ -2,8 +2,6 @@ package br.ufscar.dc.dsw.service.spec;
 
 import java.util.List;
 
-import br.ufscar.dc.dsw.domain.Cliente;
-import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.domain.Consulta;
 
 public interface IConsultaService {
@@ -12,9 +10,9 @@ public interface IConsultaService {
 
 	List<Consulta> buscarTodos();
 
-	List<Consulta> buscarPorCliente(Cliente cliente);
+	List<Consulta> buscarPorCpfCliente(String cpfCliente);
 
-	List<Consulta> buscarPorProfissional(Profissional profissional);
+	List<Consulta> buscarPorCpfProfissional(String cpfProfissional);
 
 	void salvar(Consulta consulta);
 

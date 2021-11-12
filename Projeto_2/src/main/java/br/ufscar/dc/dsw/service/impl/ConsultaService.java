@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.ConsultaDAO;
-import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Consulta;
-import br.ufscar.dc.dsw.domain.Profissional;
 import br.ufscar.dc.dsw.service.spec.IConsultaService;
 
 @Service
@@ -38,12 +36,12 @@ public class ConsultaService implements IConsultaService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Consulta> buscarPorCliente(Cliente cliente) {
-		return dao.findByCliente(cliente);
+	public List<Consulta> buscarPorCpfCliente(String cpfCliente) {
+		return dao.findByCpfCliente(cpfCliente);
 	}
 
 	@Transactional(readOnly = true)
-	public List<Consulta> buscarPorProfissional(Profissional profissional) {
-		return dao.findByProfissional(profissional);
+	public List<Consulta> buscarPorCpfProfissional(String cpfProfissional) {
+		return dao.findByCpfProfissional(cpfProfissional);
 	}
 }
