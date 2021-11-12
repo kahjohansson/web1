@@ -68,17 +68,42 @@ public class ConsultaController {
 		return "consulta/agendamento";
 	}
 
+	private boolean isHorarioOcupado(Consulta consulta) {
+		
+		List<Consulta> consultas = consultaService.buscarPorCpfProfissional(consulta.getCpfProfissional());
+		
+		for (int i = 0; i < consultas.size(); i++) {
+			if (consultas.get(i).getData().equals(consulta.getData())
+					&& consultas.get(i).getHorario() == consulta.getHorario()) {
+				return true;
+			}
+		}
+		
+		consultas = consultaService.buscarPorCpfCliente(consulta.getCpfCliente());
+		
+		for (int i = 0; i < consultas.size(); i++) {
+			if (consultas.get(i).getData().equals(consulta.getData()) && consultas.get(i).getHorario() == consulta.getHorario()) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
 	@PostMapping("/salvar")
 	public String salvar(@Valid Consulta consulta, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			return "/";
 		}
-
-		// consulta.setCpfCliente(getClienteAutenticado().getCpf());
 		
+		if (! isHorarioOcupado(consulta)){
 		consultaService.salvar(consulta);
 		attr.addFlashAttribute("sucess", "Consulta agendada com sucesso");
 		return "redirect:/";
+		} else{
+			attr.addFlashAttribute("fail", "Não foi possível agendar a consulta, o horário já está ocupado.");
+			return "redirect:/profissionais/listar";
+		}
 	}
 
     @GetMapping("/listar")
