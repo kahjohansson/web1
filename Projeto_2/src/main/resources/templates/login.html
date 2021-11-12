@@ -11,19 +11,17 @@
 <body>
 
 	<div class="nav">
-		<h1>
-			Sistema de Agendamento
-		</h1>
+		<h1 th:text="#{login.header.label}"></h1>
 	</div>
 
 	<fieldset id="login">
 		<form th:action="@{/login}" method="post">
 			<div>
 				<div>
-					<label for="username">Usuário:</label><br><input
+					<label for="username" th:text="#{usuario.label}"></label><br><input
 							type="text" id="username" name="username" class="form-control"
 							autofocus="autofocus"><br>
-					<label for="senha">Senha:</label><br><input
+					<label for="senha" th:text="#{senha.label}"></label><br><input
 							type="password" id="password" name="password"
 							class="form-control"><br>
 				</div>

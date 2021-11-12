@@ -8,13 +8,15 @@
 <meta charset="UTF-8" />
 </head>
 <body>
+
+	<h2 th:text="#{profissionais.lista.header.label}"></h2>
 			
 	<table border="1">
 		<thead>
 			<tr>
 				<th th:text="#{name.label}"></th>
-				<th>Especialidade</th>
-				<th>Área</th>
+				<th th:text="#{especialidade.label}"></th>
+				<th th:text="#{area.label}"></th>
 				<!-- <th th:text="#{acao.label}"></th> -->
 				<!-- <div sec:authorize="hasAuthority('Adm')">
 					<th th:text="#{acao.label}"></th>

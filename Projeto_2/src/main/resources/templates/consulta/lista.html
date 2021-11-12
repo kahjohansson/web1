@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+	layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+
+	<span th:text="${papel}"></span>
+	<span th:text="${consultas_len}"></span>
+			
+	<table border="1">
+		<thead>
+			<tr>
+				<th><span th:text="#{consulta.data.label}"></span></th>
+				<th><span th:text="#{consulta.horario.label}"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- <tr th:each="consulta : ${consultas}">
+				<td th:text="${consulta.data}"></td>
+				<td th:text="${consulta.horario}"></td>
+			</tr> -->
+			<!-- <tr>
+				<td>Teste</td>
+				<td>Teste</td>
+			</tr> -->
+		</tbody>
+	</table>
+
+
+	
+</body>
+</html>
