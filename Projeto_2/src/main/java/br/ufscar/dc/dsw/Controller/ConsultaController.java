@@ -112,15 +112,12 @@ public class ConsultaController {
 
 		List<Consulta> consultas;
 
-		if (usuario.getPapel() == "cliente"){
-			consultas = consultaService.buscarPorCpfCliente(getClienteAutenticado().getCpf());
-		}
-		else {
+		consultas = consultaService.buscarPorCpfCliente(getUsuarioAutenticado().getCpf());
+		
+		if (consultas.isEmpty()) {
 			consultas = consultaService.buscarPorCpfProfissional(getProfissionalAutenticado().getCpf());
 		}
 		
-		model.addAttribute("consultas", consultas);
-		model.addAttribute("consultas_len", consultas.size());
 		model.addAttribute("papel", usuario.getPapel());
 		return "consulta/lista";
 	}
