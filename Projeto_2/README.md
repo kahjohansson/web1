@@ -36,3 +36,5 @@ ___
 | R7        | Parcialmente implementado | Está implementado, porém apresenta erro                   | 85% - Karina 15% - Reynold      |
 | R8        | Implementado              | -                                                         | 40% - Karina 60% - Reynold      |
 | R9        | Implementado              | Está totalmente implementado,  porém não está funcionando | 100% - Reynold                  |
+
+R8 - Implementado após a reunião do dia 12/11
