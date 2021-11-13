@@ -23,7 +23,7 @@
 
 
 					
-					<label for="nome">Nome</label><br>
+					<th th:text="#{name.label}"></th><br>
 					<input
 						type="text" id="nome" class="form-control"
 						autofocus="autofocus" th:field="*{nome}"
@@ -35,27 +35,27 @@
 						autofocus="autofocus" th:field="*{email}"
 					/><br>
 
-					<label for="senha">Senha</label> 
+					<th th:text="#{senha.label}"></th> 
 						<input type="text" class="form-control" id="senha"
 							autofocus="autofocus" th:field="*{senha}"
 					/> <br>
 
-					<label for="area">Area</label>
+					<th th:text="#{area.label}"></th>
 					<input type="text" class="form-control" id="area" 
 						autofocus="autofocus" th:field="*{area}"
 					/> <br>
 
-					<label for="especialidade">Especialização</label>
+					<th th:text="#{especialidade.label}"></th>
 					<input type="text" class="form-control" id="especialidade" 
 						autofocus="autofocus" th:field="*{especialidade}"
 					/> <br>
 					
-					<label for="curriculo">Curriculo</label>
+					<th th:text="#{curriculo.label}"></th>
 					<input type="text" class="form-control" id="curriculo" 
 						autofocus="autofocus" th:field="*{curriculo}"
 					/> <br>
 
-				<button type="submit">Salvar</button>			
+				<button type="submit">Submit</button>			
 		</form>
 	
 </body>

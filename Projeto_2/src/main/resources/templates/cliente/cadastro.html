@@ -30,7 +30,7 @@
 
 
 					
-					<label for="nome">Nome</label><br>
+					<th th:text="#{name.label}"></th>
 					<input
 						type="text" id="nome" class="form-control"
 						autofocus="autofocus" th:field="*{nome}"
@@ -51,13 +51,13 @@
 
 					
 					
-					<label for="senha">Senha</label> 
+					<th th:text="#{senha.label}"></th> 
 						<input type="text" class="form-control" id="senha"
 							autofocus="autofocus" th:field="*{senha}"
 							th:classappend="${#fields.hasErrors('senha')} ? is-invalid"
 					/> <br>
 
-					<label for="telefone">Telefone</label>
+					<th th:text="#{telefone.label}"></th> 
 					<input type="text" class="form-control" id="telefone" placeholder="XX X XXXX-XXXX"
 						autofocus="autofocus" th:field="*{telefone}"
 						th:classappend="${#fields.hasErrors('telefone')} ? is-invalid" 
@@ -65,7 +65,7 @@
 					/> <br>
 
 
-					<label for="sexo">Sexo</label> 
+					<th th:text="#{sex.label}"></th>
 					<select name="sexo" class="form-control" id="sexo">
 						<option value="male">Male</option>
 						<option value="female">Female</option>
@@ -73,7 +73,7 @@
 					</select>
 					<br>
 					
-					<label for="dataNascimento">Data de Nascimento</label> 
+					<th th:text="#{dataNasc.label}"></th>
 					<input type="date" class="form-control" id="dataNascimento" placeholder="dd/mm/yyyy"
 						autofocus="autofocus" th:field="*{dataNascimento}"
 						th:classappend="${#fields.hasErrors('dataNascimento')} ? is-invalid"
