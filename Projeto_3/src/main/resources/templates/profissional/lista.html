@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+	layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+			
+	<table border="1">
+		<thead>
+			<tr>
+				<th>CPF</th>
+				<th th:text="#{name.label}"></th>
+				<th>Email</th>
+				<th th:text="#{senha.label}"></th>
+				<th th:text="#{area.label}"></th>
+				<th th:text="#{especialidade.label}"></th>
+				<th th:text="#{curriculo.label}"></th>
+				<th th:text="#{acao.label}"></th>
+				<!-- <div sec:authorize="hasAuthority('Adm')">
+					<th th:text="#{acao.label}"></th>
+				</div> -->
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="profissional : ${profissionais}">
+				<td th:text="${profissional.cpf}"></td>
+				<td th:text="${profissional.nome}"></td>
+				<td th:text="${profissional.email}"></td> 
+				<td th:text="${profissional.senha}"></td>
+				<td th:text="${profissional.area}"></td>
+				<td th:text="${profissional.especialidade}"></td>
+				<td th:text="${profissional.curriculo}"></td>
+				
+
+				<td>
+					<a th:href="@{/profissionais/editar/{cpf} (cpf=${profissional.cpf}) }"
+					role="button"> 
+					<span th:text="#{editar.label}"></span>
+					</a>
+					<a th:href="@{/profissionais/excluir/{cpf} (cpf=${profissional.cpf}) }"
+					role="button"> 
+					<span th:text="#{excluir.label}"></span>
+
+				</td>
+			
+			</tr>
+		</tbody>
+	</table>
+
+
+	
+</body>
+</html>

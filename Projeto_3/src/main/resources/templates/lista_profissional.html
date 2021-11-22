@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+	layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+
+	<h2 th:text="#{profissionais.lista.header.label}"></h2>
+			
+	<table border="1">
+		<thead>
+			<tr>
+				<th th:text="#{name.label}"></th>
+				<th th:text="#{especialidade.label}"></th>
+				<th th:text="#{area.label}"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="profissional : ${profissionais}">
+				<td th:text="${profissional.nome}"></td>
+				<td th:text="${profissional.especialidade}"></td>
+				<td th:text="${profissional.area}"></td>
+				<div sec:authorize="hasAuthority('cliente')">
+				<td> <a th:href="@{/consultas/agendar/{cpf} (cpf=${profissional.cpf}) }"
+					role="button"> 
+					<span th:text="#{consulta.agendar.label}"></span>
+					</a></td>
+				</div>
+			</tr>
+		</tbody>
+	</table>
+
+
+	
+</body>
+</html>

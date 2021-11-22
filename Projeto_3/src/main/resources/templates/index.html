@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+	layout:decorate="~{layout}">
+
+<head>
+    <title>Index</title>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+		<h1>
+			<span th:text="#{index.header}">		
+		</h1>
+			
+		<h2 th:text="#{welcome.label}">
+		</h2>
+
+		<a th:href="@{/login}">
+			<div class="btn">
+				<span th:text="#{login.button.label}">
+			</div>
+		</a>
+
+		<a th:href="@{/profissionais/listar}">
+			<div class="btn">
+				<span th:text="#{profissionais.lista.button.label}">
+			</div>
+		</a>
+
+		<a th:href="@{/consultas/listar}">
+			<div class="btn">
+				<span th:text="#{consultas.lista.button.label}">
+			</div>
+		</a>
+
+		<!-- <div sec:authorize="hasRole('admin')"> -->
+			<p><a th:href="@{/admin}" th:text="#{admin.home.button.label}"></a></p>
+		<!-- </div> -->
+	
+		
+
+</body>
+
+</html>

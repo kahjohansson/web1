@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{fragments/layout}">
+
+<head>
+	<title>Cadastro Cliente</title>
+	<meta charset="UTF-8">
+	
+</head>
+
+
+<body>	
+		
+	<div th:replace="fragments/alert"></div>
+		<form th:action="@{/clientes/salvar}" th:object="${cliente}" method="POST">					
+					
+					<label for="cpf">CPF</label><br>
+					<input
+						type="text" id="cpf" placeholder="___.___.___-__" class="form-control"
+						autofocus="autofocus" th:field="*{cpf}"
+						th:classappend="${#fields.hasErrors('cpf')} ? is-invalid" 
+						data-mask="000.000.000-00" data-mask-reverse="true" 
+					/>
+					<div class="invalid-feedback">
+						<span th:errors="*{cpf}"></span>
+					</div>
+
+					<br>
+
+
+					
+					<th th:text="#{name.label}"></th>
+					<input
+						type="text" id="nome" class="form-control"
+						autofocus="autofocus" th:field="*{nome}"
+						th:classappend="${#fields.hasErrors('nome')} ? is-invalid" 
+					/>
+					<div class="invalid-feedback">
+						<span th:errors="*{nome}"></span>
+					</div>
+
+					<br>
+
+								
+					<label for="email">Email</label> 
+					<input type="email" class="form-control" id="email" placeholder="xxxx@email.com"
+						autofocus="autofocus" th:field="*{email}"
+						th:classappend="${#fields.hasErrors('email')} ? is-invalid"
+					/><br>
+
+					
+					
+					<th th:text="#{senha.label}"></th> 
+						<input type="text" class="form-control" id="senha"
+							autofocus="autofocus" th:field="*{senha}"
+							th:classappend="${#fields.hasErrors('senha')} ? is-invalid"
+					/> <br>
+
+					<th th:text="#{telefone.label}"></th> 
+					<input type="text" class="form-control" id="telefone" placeholder="XX X XXXX-XXXX"
+						autofocus="autofocus" th:field="*{telefone}"
+						th:classappend="${#fields.hasErrors('telefone')} ? is-invalid" 
+						data-mask="00 0 0000-0000" data-mask-reverse="true"
+					/> <br>
+
+
+					<th th:text="#{sex.label}"></th>
+					<select name="sexo" class="form-control" id="sexo">
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+						<option value="other">Other</option>
+					</select>
+					<br>
+					
+					<th th:text="#{dataNasc.label}"></th>
+					<input type="date" class="form-control" id="dataNascimento" placeholder="dd/mm/yyyy"
+						autofocus="autofocus" th:field="*{dataNascimento}"
+						th:classappend="${#fields.hasErrors('dataNascimento')} ? is-invalid"
+						data-mask="00/00/0000" data-mask-reverse="true"
+					/> <br>
+
+				<button type="submit">Salvar</button>			
+		</form>
+	
+</body>
+
+</html>

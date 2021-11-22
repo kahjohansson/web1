@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{fragments/layout}">
+
+<head>
+	<title>Cadastro Cliente</title>
+	<meta charset="UTF-8">
+</head>
+
+<body>	
+
+		<h2><span th:text="#{consulta.header_agendamento.label}"></h2>
+		
+		<form th:action="@{/consultas/salvar}" th:object="${consulta}" method="POST">					
+					
+					<label for="data" th:text="#{consulta.data.label}"></label><br>
+					<input
+						type="date" id="data" class="form-control"
+						autofocus="autofocus" th:field="*{data}"
+					/><br><br>
+
+					<label for="horario" th:text="#{consulta.horario.label}"></label> <br>
+					<select name="horario" id="horario" th:field="*{horario}"
+						class="form-control" autofocus="autofocus"
+						th:classappend="${#fields.hasErrors('horario')} ? is-invalid">
+						<option th:value="8">08:00 - 09:00</option>
+						<option th:value="9">09:00 - 10:00</option>
+						<option th:value="10">10:00 - 11:00</option>
+						<option th:value="11">11:00 - 12:00</option>
+						<option th:value="12">12:00 - 13:00</option>
+						<option th:value="13">13:00 - 14:00</option>
+						<option th:value="14">14:00 - 15:00</option>
+						<option th:value="15">15:00 - 16:00</option>
+						<option th:value="16">16:00 - 17:00</option>
+						<option th:value="17">17:00 - 18:00</option>
+						<option th:value="18">18:00 - 19:00</option>
+					</select>
+
+					<br><br>
+
+				<input type="hidden" id="cpfCliente" th:field="*{cpfCliente}" th:value="*{cpfCliente}" />
+				<input type="hidden" id="cpfProfissional" th:field="*{cpfProfissional}" th:value="*{cpfProfissional}" />
+
+				<button type="submit">Salvar</button>			
+		</form>
+	
+</body>
+
+</html>

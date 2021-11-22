@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity"
+	layout:decorate="~{layout}">
+
+
+<head>
+    <title>Cadastro Profissionais</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+		<form th:action="@{/profissionais/editar}" th:object="${profissional}" method="POST">	
+	
+					<fieldset>
+						<legend> <th th:text="#{edit_prof.label}"></th> </legend>
+						
+						
+						CPF <br/>
+						<input type="text" name="cpf" th:value="${profissional.cpf}" readonly/> <br/>
+						
+						<th th:text="#{name.label}"></th> <br/>
+						<input type="text" name="nome" th:value="${profissional.nome}"/> <br/>
+						
+						Email <br/>
+						<input type="email" name="email" th:value="${profissional.email}"/> <br/>
+						
+						<th th:text="#{senha.label}"></th> <br/>
+						<input type="text" name="senha" th:value="${profissional.senha}"/> <br/>
+						
+						<th th:text="#{area.label}"></th> <br/>
+						<input type="text" name="area" th:value="${profissional.area}"/> <br/>
+						
+						<th th:text="#{especialidade.label}"></th><br/>
+						<input type="text" name="especialidade" th:value="${profissional.especialidade}"/> <br/>
+						
+						<th th:text="#{curriculo.label}"></th> <br/>
+						<input type="text" name="curriculo" th:value="${profissional.curriculo}"/> <br/>
+
+						<input type="submit" name="enviar" value="atualizar" />
+					</fieldset>
+			</form>
+		
+</body>
+
+</html>
