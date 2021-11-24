@@ -117,8 +117,6 @@ public class ClienteRestController {
 		if (cliente == null) {
 			return ResponseEntity.notFound().build();
 		} 
-		// else if (!cliente.getConsultas().isEmpty()) {
-		// 	return ResponseEntity.ok(false);
 		else {
 			serviceCliente.excluir(cpf);
 			return ResponseEntity.ok(true);
