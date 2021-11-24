@@ -9,6 +9,8 @@ public interface IProfissionalService {
 	Profissional buscarPorCpf(String cpf);
 
 	Profissional buscarPorEmail(String email);
+
+	List<Profissional> buscarPorEspecialidade(String especialidade);
 	
 	List<Profissional> buscarTodos();
 	

@@ -13,6 +13,8 @@ public interface ProfissionalDAO extends CrudRepository<Profissional, String>{
 
 	Profissional findByEmail(String email);
 
+	List<Profissional> findByEspecialidade(String especialidade);
+
 	List<Profissional> findAll();
 	
 	Profissional save(Profissional Profissional);
